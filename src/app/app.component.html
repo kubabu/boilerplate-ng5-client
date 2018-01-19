@@ -1,0 +1,34 @@
+<mat-sidenav-container [class.m2app-dark]="isDarkTheme">
+
+  <mat-sidenav #sidenav mode="side">
+    <div class="flex-container" fxLayout="column">
+      <button class="flex-item" mat-button [routerLinkActive]="['active']" [routerLink]="['barcode']">Homepage
+      </button>
+      <div class="flex-item">
+        <hr>
+      </div>
+      <button class="flex-item" mat-button [routerLinkActive]="['active']" [routerLink]="['barcode/media']">Media Stream
+      </button>
+      <div class="flex-item">
+        <hr>
+      </div>
+      <button class="flex-item" mat-button [routerLinkActive]="['active']" [routerLink]="['barcode/field']">Input File
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-toolbar color="primary">
+
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+    {{title}}
+    <span class="app-toolbar-filler"></span>
+    {{fork}}
+
+  </mat-toolbar>
+
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
+<app-fab-menu [isDarkTheme]="isDarkTheme"></app-fab-menu>
