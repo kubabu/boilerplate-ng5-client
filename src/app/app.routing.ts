@@ -3,12 +3,14 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NgModule } from '@angular/core';
 
+import { DashboardComponent } from './heroes/dashboard/dashboard.component';
+
 const ROOT_ROUTES: Routes = [
-  // {
-  //   path: '',
-  //   component: AppComponent,
-  //   pathMatch: 'full',
-  // },
+  {
+    path: '',
+    component: DashboardComponent,
+    pathMatch: 'full',
+  },
   {
     path: 'heroes',
     loadChildren: './heroes/heroes.module#HeroesModule',

@@ -8,7 +8,7 @@
       
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of heroes$ | async" [value]="option"
-        routerLink="/detail/{{option.id}}">
+        routerLink="/heroes/detail/{{option.id}}">
           {{ option.name }}
         </mat-option>
       </mat-autocomplete>
