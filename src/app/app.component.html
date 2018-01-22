@@ -13,21 +13,21 @@
 
       <mat-toolbar-row>
         <button mat-button class="app-sidebar-button"
-        (click)="sidenav.toggle()" routerLink="">
+        (click)="sidenav.toggle()" routerLink="/heroes">
           MAIN VIEW
         </button>
       </mat-toolbar-row>
 
       <mat-toolbar-row>
         <button mat-button class="app-sidebar-button" mat-tooltip="Heroes"
-        (click)="sidenav.toggle()" routerLink="/heroes">
+        (click)="sidenav.toggle()" routerLink="/heroes/all">
           HEROES
         </button>
       </mat-toolbar-row>
       
       <mat-toolbar-row>
         <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
-        (click)="sidenav.toggle()" routerLink="/touch">
+        (click)="sidenav.toggle()" routerLink="/heroes/touch">
           TOUCH DEMO
         </button>
       </mat-toolbar-row>

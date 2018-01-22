@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { HeroesRouteModule } from './heroes.route';
 import { SharedModule } from '../modules/shared.module';
 
@@ -13,7 +13,7 @@ import { MessagesComponent } from './messages/messages.component';
 @NgModule({
   imports: [
     SharedModule,
-    CommonModule,
+    // CommonModule,
     HeroesRouteModule,
   ],
   declarations: [

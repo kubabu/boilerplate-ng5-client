@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -10,13 +10,19 @@ import { MessagesComponent } from './messages/messages.component';
 
 
 const routes: Routes = [
-  { path: 'heroes', component: HeroesComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'messages', component: MessagesComponent },
-  { path: 'touch', component: HammerDemoComponent },
-  { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'top', redirectTo: 'dashboard',  pathMatch: 'full' },
-  { path: '', component: DashboardComponent },
+  { path: '',
+    component: DashboardComponent,
+    children: [
+      { path: 'all', component: HeroesComponent },
+      { path: 'messages', component: MessagesComponent },
+      { path: 'touch', component: HammerDemoComponent },
+      { path: 'detail/:id', component: HeroDetailComponent },
+      {
+        path: '',
+        component: DashboardComponent,
+      },
+      // { path: 'top', redirectTo: 'dashboard',  pathMatch: 'full' },
+    ]},
 ];
 
 @NgModule({

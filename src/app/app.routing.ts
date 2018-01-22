@@ -4,10 +4,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NgModule } from '@angular/core';
 
 const ROOT_ROUTES: Routes = [
+  // {
+  //   path: '',
+  //   component: AppComponent,
+  //   pathMatch: 'full',
+  // },
   {
-    path: '',
-    component: AppComponent,
-    pathMatch: 'full',
+    path: 'heroes',
+    loadChildren: './heroes/heroes.module#HeroesModule',
   },
   {
     path: 'barcode',

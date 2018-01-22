@@ -26,7 +26,7 @@ import { HeroesModule } from 'app/heroes/heroes.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     BarcodeModule,
-    // HeroesModule,
+    HeroesModule,
   ],
   bootstrap: [
     AppComponent,
