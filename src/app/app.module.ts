@@ -27,7 +27,7 @@ import { BarcodeModule } from './barcode/barcode.module';
     BarcodeModule,
   ],
   bootstrap: [
-    AppComponent
+    AppComponent,
   ],
 })
 
