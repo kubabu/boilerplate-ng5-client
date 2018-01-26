@@ -42,11 +42,11 @@ export class HeroService {
 @Injectable()
 export class HeroHttpService extends HeroService {
 
-  private heroesUrl = 'http://localhost:54555/api/Heroes';
+  private heroesUrl = 'https://localhost:54556/api/Heroes'; // hosted on Kestrel
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     super();
    }
