@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   // moduleId: module.id,
   selector: 'app-hammer-demo',
   templateUrl: './hammer-demo.component.html',
-  styleUrls: ['./hammer-demo.component.css']
+  styleUrls: ['./hammer-demo.component.css'],
 })
 export class HammerDemoComponent implements OnInit {
 
@@ -15,24 +15,24 @@ export class HammerDemoComponent implements OnInit {
   avatars = [
     {
       name: 'kristy',
-      image: 'http://semantic-ui.com/images/avatar2/large/kristy.png',
-      visible: true
+      image: 'assets/img/hammer-demo/kristy.png',
+      visible: true,
     },
     {
       name: 'matthew',
-      image: 'http://semantic-ui.com/images/avatar2/large/matthew.png',
-      visible: false
+      image: 'assets/img/hammer-demo/matthew.png',
+      visible: false,
     },
     {
       name: 'chris',
-      image: 'http://semantic-ui.com/images/avatar/large/chris.jpg',
-      visible: false
+      image: 'assets/img/hammer-demo/chris.jpg',
+      visible: false,
     },
     {
       name: 'jenny',
-      image: 'http://semantic-ui.com/images/avatar/large/jenny.jpg',
-      visible: false
-    }
+      image: 'assets/img/hammer-demo/jenny.jpg',
+      visible: false,
+    },
   ];
 
   constructor() { }
