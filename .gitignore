@@ -22,6 +22,11 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# SSL certificates
+ssl/*
+certificate.crt
+certificate.key
+
 # misc
 /.sass-cache
 /connect.lock
