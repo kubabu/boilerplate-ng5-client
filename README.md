@@ -11,7 +11,8 @@ soon as possible and possibly make that as an NG Module and reusable soon.
 This project was generated with [angular-cli](https://github.com/angular/angular-cli).
 
 ## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+Run `npm start` (not `ng serve` ! no ssl there) for a dev server. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

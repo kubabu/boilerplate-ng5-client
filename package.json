@@ -1,7 +1,7 @@
 {
-  "name": "ng2-barcode-validator",
-  "author": "Majid Hajian",
-  "version": "1.0.0",
+  "name": "onix-web-api",
+  "author": "Kuba Buda",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
