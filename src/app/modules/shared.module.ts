@@ -13,6 +13,7 @@ import {
   MatToolbarModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ApiConfiguration } from '../config/api-config';
 
 // modules
 const SHARED_COMPONENTS = [];
@@ -41,7 +42,9 @@ const SHARED_MODULES: any[] = [
   FlexLayoutModule,
 ];
 
-const PROVIDERS: any[] = [];
+const PROVIDERS: any[] = [
+  ApiConfiguration,
+];
 
 /**
  * SharedModule

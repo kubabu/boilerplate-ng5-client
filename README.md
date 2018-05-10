@@ -12,7 +12,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 ## Development server
 
-Run `npm start` (not `ng serve` ! no ssl there) for a dev server. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` (not `ng serve` ! no ssl there) for a dev server. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files
 
 ## Code scaffolding
 
