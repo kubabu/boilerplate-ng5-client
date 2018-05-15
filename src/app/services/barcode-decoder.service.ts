@@ -49,7 +49,7 @@ export class BarcodeDecoderService {
   }
 
   onProcessed(result: any) {
-    let drawingCtx = Quagga.canvas.ctx.overlay,
+    const drawingCtx = Quagga.canvas.ctx.overlay,
       drawingCanvas = Quagga.canvas.dom.overlay;
 
       if (result) {
@@ -113,6 +113,7 @@ export class BarcodeDecoderService {
 
   onDecodeStop() {
     Quagga.stop();
+    // tslint:disable-next-line:no-console
     console.info('Camera Stopped Working!');
   }
 
