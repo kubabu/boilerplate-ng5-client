@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HeroesRouteModule } from './heroes.route';
-import { SharedModule } from '../modules/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
