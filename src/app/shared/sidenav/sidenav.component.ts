@@ -6,10 +6,10 @@ import { MatSidenav } from '@angular/material';
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styles: [],
-
 })
+
 export class SidenavComponent implements OnInit {
-  private @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor(public sidebar: SidebarService) { }
 
