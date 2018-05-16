@@ -4,17 +4,17 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.css'],
 })
 
 export class AppComponent implements OnInit {
   isDarkTheme = false;
-  title = 'Angular Barcode Scanner';
+  title = 'ONIX Web';
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // this.router.navigateByUrl('/barcode')
+    this.router.navigateByUrl('/barcode')
   }
 
 }
