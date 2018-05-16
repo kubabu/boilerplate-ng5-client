@@ -4,12 +4,16 @@ import { BarcodeValidatorService } from '../services/barcode/barcode-validator.s
 import { HeroService, HeroHttpService } from '../services/hero.service';
 import { SharedModule } from './shared.module';
 import { MessageService } from 'app/services/message.service';
+import { SidebarService } from '../services/sidebar.service';
+import { ApiConfiguration } from '../config/api-config';
 
 @NgModule({
   imports: [
     SharedModule,
   ],
   providers: [
+    ApiConfiguration,
+    SidebarService,
     BarcodeValidatorService,
     BarcodeDecoderService,
     { provide: HeroService, useClass: HeroHttpService },

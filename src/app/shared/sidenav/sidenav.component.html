@@ -1,4 +1,52 @@
-<mat-sidenav #sidenav mode="side">
+<mat-sidenav #sidenav mode="over" color="primary">
+  <mat-toolbar>
+    <mat-toolbar-row> 
+      <!-- dummy placeholder -->
+      <button mat-button class="app-sidebar-button" (click)="sidebar.toggle()">
+      ZWIŃ MENU
+      <!-- <mat-icon class="example-icon">account_circle</mat-icon> -->
+      </button> 
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <button mat-button class="app-sidebar-button"
+      (click)="sidebar.toggle()" routerLink="">
+      STRONA GŁÓWNA
+      </button>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <button mat-button class="app-sidebar-button" mat-tooltip="Heroes"
+      (click)="sidebar.toggle()" routerLink="/heroes/all">
+      ZAMÓWIENIA
+      </button>
+    </mat-toolbar-row>
+    
+    <mat-toolbar-row>
+      <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
+      (click)="sidebar.toggle()" routerLink="/heroes/touch">
+      SWIPE DEMO
+      </button>
+    </mat-toolbar-row>
+    
+    <mat-toolbar-row>
+      <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
+      (click)="sidebar.toggle()" routerLink="/barcode">
+      CZYTNIK KODÓW
+      </button>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <button mat-button class="app-sidebar-button"
+      (click)="sidebar.toggle()" routerLink="/heroes/messages">
+      WIADOMOŚCI ( 0 ) 
+      <!-- {{ messageService.messages.length }} ) -->
+      </button>
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+</mat-sidenav>
+  <!-- <mat-sidenav #sidenav mode="side">
   <div class="flex-container"
        fxLayout="column">
     <button class="flex-item" mat-button
@@ -21,4 +69,4 @@
     </button>
   </div>
 </mat-sidenav>
-
+ -->

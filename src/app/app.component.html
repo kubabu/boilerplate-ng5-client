@@ -1,57 +1,9 @@
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav mode="over" color="primary">
-    <mat-toolbar>
-
-      <mat-toolbar-row> 
-        <!-- dummy placeholder -->
-        <button mat-button class="app-sidebar-button" (click)="sidenav.toggle()">
-          ZWIŃ MENU
-          <!-- <mat-icon class="example-icon">account_circle</mat-icon> -->
-        </button> 
-      </mat-toolbar-row>
-
-      <mat-toolbar-row>
-        <button mat-button class="app-sidebar-button"
-        (click)="sidenav.toggle()" routerLink="">
-          STRONA GŁÓWNA
-        </button>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row>
-        <button mat-button class="app-sidebar-button" mat-tooltip="Heroes"
-        (click)="sidenav.toggle()" routerLink="/heroes/all">
-          ZAMÓWIENIA
-        </button>
-      </mat-toolbar-row>
-      
-      <mat-toolbar-row>
-        <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
-        (click)="sidenav.toggle()" routerLink="/heroes/touch">
-          SWIPE DEMO
-        </button>
-      </mat-toolbar-row>
-      
-      <mat-toolbar-row>
-        <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
-        (click)="sidenav.toggle()" routerLink="/barcode">
-          CZYTNIK KODÓW
-        </button>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row>
-        <button mat-button class="app-sidebar-button"
-        (click)="sidenav.toggle()" routerLink="/heroes/messages">
-          WIADOMOŚCI ( 0 ) 
-          <!-- {{ messageService.messages.length }} ) -->
-        </button>
-      </mat-toolbar-row>
-
-    </mat-toolbar>
-  </mat-sidenav>
+  <app-sidenav></app-sidenav>
 
   <mat-toolbar color="primary">
-    <button mat-button class="app-menu-button" (click)="sidenav.toggle()">
+    <button mat-button class="app-menu-button" (click)="sidebar.toggle()" >
       <i class="material-icons">menu</i>
     </button>
     <span class="title">{{ title | uppercase }}</span>
