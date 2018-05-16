@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterContentInit } from '@angular/core';
-import { BarcodeDecoderService } from '../../services/barcode-decoder.service';
-import { BarcodeValidatorService } from '../../services/barcode-validator.service';
+import { BarcodeDecoderService } from '../../services/barcode/barcode-decoder.service';
+import { BarcodeValidatorService } from '../../services/barcode/barcode-validator.service';
 import { Subject } from 'rxjs/Subject';
 
 
 @Component({
   selector: 'app-media-stream',
   templateUrl: './media-stream.component.html',
-  styleUrls: ['./media-stream.component.scss']
+  styleUrls: ['./media-stream.component.scss'],
 })
 export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit {
 
