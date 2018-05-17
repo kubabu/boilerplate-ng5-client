@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   title = 'ONIX Web client';
 
   constructor(private router: Router,
-    public sidebar: SidebarService,
     private titleService: Title) {}
 
   ngOnInit() {
