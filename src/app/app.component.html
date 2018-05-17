@@ -1,10 +1,10 @@
 <mat-sidenav-container>
-  
+
   <mat-sidenav #sidenav mode="over" color="primary">
       <mat-toolbar>
         <mat-toolbar-row> 
           <!-- dummy placeholder -->
-          <button mat-button class="app-sidebar-button" (click)="sidenav.toggle()">
+          <button mat-button class="app-sidebar-button" (click)="toggleSidenav()">
           ZWIŃ MENU
           <!-- <mat-icon class="example-icon">account_circle</mat-icon> -->
           </button> 
@@ -12,35 +12,35 @@
     
         <mat-toolbar-row>
           <button mat-button class="app-sidebar-button"
-          (click)="sidenav.toggle()" routerLink="">
+          (click)="toggleSidenav()" routerLink="">
           STRONA GŁÓWNA
           </button>
         </mat-toolbar-row>
     
         <mat-toolbar-row>
           <button mat-button class="app-sidebar-button" mat-tooltip="Heroes"
-          (click)="sidenav.toggle()" routerLink="/heroes/all">
+          (click)="toggleSidenav()" routerLink="/heroes/all">
           ZAMÓWIENIA
           </button>
         </mat-toolbar-row>
         
         <mat-toolbar-row>
           <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
-          (click)="sidenav.toggle()" routerLink="/heroes/touch">
+          (click)="toggleSidenav()" routerLink="/heroes/touch">
           SWIPE DEMO
           </button>
         </mat-toolbar-row>
         
         <mat-toolbar-row>
           <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
-          (click)="sidenav.toggle()" routerLink="/barcode">
+          (click)="toggleSidenav()" routerLink="/barcode">
           CZYTNIK KODÓW
           </button>
         </mat-toolbar-row>
     
         <mat-toolbar-row>
           <button mat-button class="app-sidebar-button"
-          (click)="sidenav.toggle()" routerLink="/heroes/messages">
+          (click)="toggleSidenav()" routerLink="/heroes/messages">
           WIADOMOŚCI ( 0 ) 
           <!-- {{ messageService.messages.length }} ) -->
           </button>
@@ -51,7 +51,7 @@
 
 
   <mat-toolbar color="primary">
-    <button mat-button class="app-menu-button" (click)="sidenav.toggle()" >
+    <button mat-button class="app-menu-button" (click)="toggleSidenav()" >
       <i class="material-icons">menu</i>
     </button>
     <span class="title">{{ title | uppercase }}</span>
