@@ -6,7 +6,7 @@ import { Subject } from 'rxjs/Subject';
 import { of } from 'rxjs/observable/of';
 
 import {
-   debounceTime, distinctUntilChanged, switchMap
+   debounceTime, distinctUntilChanged, switchMap,
  } from 'rxjs/operators';
 
 import { Hero } from './../../models/hero';
@@ -15,7 +15,7 @@ import { HeroService } from './../../services/hero.service';
 @Component({
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
-  styleUrls: [ './hero-search.component.css' ]
+  styleUrls: [ './hero-search.component.css' ],
 })
 export class HeroSearchComponent implements OnInit {
 

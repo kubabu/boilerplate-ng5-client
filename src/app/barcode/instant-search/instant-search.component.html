@@ -1,0 +1,21 @@
+<mat-card>
+    <!-- <input class="instantInput" (input)="code$.next($event.target.value)" (keydown)="onChange()"
+        autofocus=true
+        placeholder="Kod kreskowy"> -->
+
+    <form class="instantInput">
+        <mat-form-field class="example-full-width" autofocus=true>
+            <input class="instantInput" matInput placeholder="Kod kreskowy" (input)="code$.next($event.target.value)" (keydown)="onChange()">
+            <mat-icon matSuffix>camera</mat-icon>
+        </mat-form-field> 
+    </form>
+
+    <div class="flex-container text-center" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex-item">
+        <mat-spinner color="accent" class="app-spinner" *ngIf="spinner"></mat-spinner>
+        </div>
+        <div class="flex-item" *ngIf="!spinner">
+        <mat-card *ngIf="message"> {{message}}</mat-card>
+        </div>
+    </div>
+</mat-card>

@@ -4,21 +4,8 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-instant-search',
-  template: `
-    <mat-card>
-      <input class="instantInput" (input)="code$.next($event.target.value)" (keydown)="onChange()"
-             placeholder="Type your barcode number">
-      <div class="flex-container text-center" fxLayout="row" fxLayoutAlign="center center">
-        <div class="flex-item">
-          <mat-spinner color="accent" class="app-spinner" *ngIf="spinner"></mat-spinner>
-        </div>
-        <div class="flex-item" *ngIf="!spinner">
-          <mat-card *ngIf="message"> {{message}}</mat-card>
-        </div>
-      </div>
-
-    </mat-card>
-  `,
+  templateUrl: './instant-search.component.html',
+  styleUrls: ['./instant-search.component.css'],
 })
 export class InstantSearchComponent implements OnInit {
 
