@@ -4,6 +4,7 @@ import { MediaStreamComponent } from './media-stream/media-stream.component';
 import { InputFieldComponent } from './input-field/input-field.component';
 import { InstantSearchComponent } from './instant-search/instant-search.component';
 import { BarcodeComponent } from './barcode.component';
+import { DummyPlaceholderComponent } from './dummy-placeholder/dummy-placeholder.component';
 
 export const BARCODE_ROUTE: Routes = [
   {
@@ -12,22 +13,12 @@ export const BARCODE_ROUTE: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/barcode/upload',
-        pathMatch: 'full',
-      },
-      {
-        path: 'upload',
-        component: InstantSearchComponent,
+        component: DummyPlaceholderComponent,
         pathMatch: 'full',
       },
       {
         path: 'media',
         component: MediaStreamComponent,
-        pathMatch: 'full',
-      },
-      {
-        path: 'field',
-        component: InputFieldComponent,
         pathMatch: 'full',
       },
     ],
