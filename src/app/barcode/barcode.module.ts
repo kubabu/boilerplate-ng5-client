@@ -5,7 +5,7 @@ import { BarcodeComponent } from './barcode.component';
 import { InstantSearchComponent } from './instant-search/instant-search.component';
 import { InputFieldComponent } from './input-field/input-field.component';
 import { MediaStreamComponent } from './media-stream/media-stream.component';
-import { DummyPlaceholderComponent } from './dummy-placeholder/dummy-placeholder.component';
+import { OpenMediaStreamComponent } from './open-media-stream/open-media-stream.component';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { DummyPlaceholderComponent } from './dummy-placeholder/dummy-placeholder
     InstantSearchComponent,
     InputFieldComponent,
     MediaStreamComponent,
-    DummyPlaceholderComponent,
+    OpenMediaStreamComponent,
   ],
 })
 

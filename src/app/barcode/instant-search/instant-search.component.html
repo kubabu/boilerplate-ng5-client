@@ -1,8 +1,10 @@
 <mat-card>
     <form class="instantInput">
         <mat-form-field class="example-full-width">
-            <input class="instantInput" matInput placeholder="Kod kreskowy" (input)="code$.next($event.target.value)" (keydown)="onChange()">
-            <mat-icon matSuffix [routerLink]="['media']">camera_alt</mat-icon>
+            <input matInput #barcodeInput class="instantInput"
+                placeholder="Kod kreskowy" (keydown)="onChange()">
+             <!-- (input)="code$.next($event.target.value)"> -->
+            <mat-icon matSuffix (click)="submit()">send</mat-icon>
         </mat-form-field> 
     </form>
 

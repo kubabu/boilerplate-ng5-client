@@ -8,11 +8,11 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class BarcodeValidatorService {
 
-  constructor(private _http: HttpClient) { }
-
   private endpoints = {
     search: 'https://exmpale-barcode-service.com', // sample endpoint to validate your barcode
   };
+
+  constructor(private _http: HttpClient) { }
 
   doSearchbyCode(codes: Observable<any>, debounceMs = 400) {
     return codes

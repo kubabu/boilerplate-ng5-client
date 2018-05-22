@@ -4,7 +4,7 @@ import { MediaStreamComponent } from './media-stream/media-stream.component';
 import { InputFieldComponent } from './input-field/input-field.component';
 import { InstantSearchComponent } from './instant-search/instant-search.component';
 import { BarcodeComponent } from './barcode.component';
-import { DummyPlaceholderComponent } from './dummy-placeholder/dummy-placeholder.component';
+import { OpenMediaStreamComponent } from './open-media-stream/open-media-stream.component';
 
 export const BARCODE_ROUTE: Routes = [
   {
@@ -13,7 +13,7 @@ export const BARCODE_ROUTE: Routes = [
     children: [
       {
         path: '',
-        component: DummyPlaceholderComponent,
+        component: OpenMediaStreamComponent,
         pathMatch: 'full',
       },
       {

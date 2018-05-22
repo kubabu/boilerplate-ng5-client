@@ -8,7 +8,7 @@ describe('MediaStreamComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-             declarations: [MediaStreamComponent]
+             declarations: [MediaStreamComponent],
            })
            .compileComponents();
   }));

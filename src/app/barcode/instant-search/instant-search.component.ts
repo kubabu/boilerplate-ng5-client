@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
 import { BarcodeValidatorService } from '../../services/barcode/barcode-validator.service';
 import { Subject } from 'rxjs/Subject';
 
@@ -7,11 +7,12 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: './instant-search.component.html',
   styleUrls: ['./instant-search.component.css'],
 })
-export class InstantSearchComponent implements OnInit {
+export class InstantSearchComponent implements OnInit, AfterContentInit {
 
   spinner: boolean;
   message: string;
 
+  @ViewChild('barcodeInput') firstNameElement: ElementRef;
 
   code$ = new Subject<any>();
 
@@ -33,7 +34,15 @@ export class InstantSearchComponent implements OnInit {
   }
 
   onChange() {
-    this.spinner = true;
+    // this.spinner = true;
+    // detect enter
   }
 
+  ngAfterContentInit() {
+    this.firstNameElement.nativeElement.focus();
+  }
+
+  submit() {
+    this.spinner = false;
+  }
 }
