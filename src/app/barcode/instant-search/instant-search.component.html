@@ -2,18 +2,9 @@
     <form class="instantInput">
         <mat-form-field class="example-full-width">
             <input matInput #barcodeInput class="instantInput"
-                placeholder="Kod kreskowy" (keydown)="onChange()">
-             <!-- (input)="code$.next($event.target.value)"> -->
-            <mat-icon matSuffix (click)="submit()">send</mat-icon>
+                placeholder="Kod kreskowy" (keydown.enter)="onSubmit()"> 
+                <!-- (keydown)="onChange()"  // for ongoing code validatin, now unused -->
+            <mat-icon matSuffix (click)="onSubmit()">send</mat-icon>
         </mat-form-field> 
     </form>
-
-    <div class="flex-container text-center" fxLayout="row" fxLayoutAlign="center center">
-        <div class="flex-item">
-        <mat-spinner color="accent" class="app-spinner" *ngIf="spinner"></mat-spinner>
-        </div>
-        <div class="flex-item" *ngIf="!spinner">
-        <mat-card *ngIf="message"> {{message}}</mat-card>
-        </div>
-    </div>
 </mat-card>

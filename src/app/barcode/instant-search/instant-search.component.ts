@@ -9,10 +9,9 @@ import { Subject } from 'rxjs/Subject';
 })
 export class InstantSearchComponent implements OnInit, AfterContentInit {
 
-  spinner: boolean;
   message: string;
 
-  @ViewChild('barcodeInput') firstNameElement: ElementRef;
+  @ViewChild('barcodeInput') barcodeElement: ElementRef;
 
   code$ = new Subject<any>();
 
@@ -23,26 +22,23 @@ export class InstantSearchComponent implements OnInit, AfterContentInit {
         .doSearchbyCode(this.code$)
         .subscribe(
           res => {
-            this.spinner = false;
             this.message = res
           },
           err => {
-            this.spinner = false;
             this.message = `An Error! ${err.json().error}`
           },
         );
   }
 
   onChange() {
-    // this.spinner = true;
-    // detect enter
+    this.code$.next(this.barcodeElement.nativeElement.value);
   }
 
   ngAfterContentInit() {
-    this.firstNameElement.nativeElement.focus();
+    this.barcodeElement.nativeElement.focus();
   }
 
-  submit() {
-    this.spinner = false;
+  onSubmit() {
+    this.barcodeElement.nativeElement.value = ''; // continue somehow
   }
 }

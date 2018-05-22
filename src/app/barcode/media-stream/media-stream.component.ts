@@ -47,7 +47,6 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
 
   ngAfterContentInit() {
     this.interactive.nativeElement.children[0].style.position = 'absolute';
-    // this.firstNameElement.nativeElement.focus();
   }
 
   ngOnDestroy() {
