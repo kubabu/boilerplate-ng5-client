@@ -12,9 +12,6 @@ import { Subject } from 'rxjs/Subject';
 export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit {
 
   lastResult: any;
-  message: any;
-  error: any;
-
   code$ = new Subject<any>();
 
   @ViewChild('interactive') interactive;
@@ -27,22 +24,15 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
     this.decoderService.onDecodeProcessed();
 
     this.decoderService
-        .onDecodeDetected()
-        .then(code => {
-          this.lastResult = code;
-          this.decoderService.onPlaySound();
-          this.code$.next(code);
-        })
-        .catch((err) => this.error = `Something Wrong: ${err}`);
+      .onDecodeDetected()
+      .then(code => {
+        this.lastResult = code;
+        this.decoderService.onPlaySound();
+        this.code$.next(code);
+      });
 
-        this.barcodeValidator
-        .doSearchbyCode(this.code$)
-        .subscribe(
-          res => this.message = res,
-          err => {
-            this.message = `An Error! ${err.json().error}`
-          },
-        );
+    this.barcodeValidator
+      .doSearchbyCode(this.code$);
   }
 
   ngAfterContentInit() {

@@ -3,35 +3,35 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/observable';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
 export class BarcodeValidatorService {
+  // This service checks if decoded barcode is allowed in given context
+  public validatedCodes: Observable<any>;
 
-  private endpoints = {
-    search: 'https://exmpale-barcode-service.com', // sample endpoint to validate your barcode
-  };
+  private codes: Subject<any>;
 
-  constructor(private _http: HttpClient) { }
+  constructor() {
+    this.codes = new Subject<any>();
+    this.validatedCodes = this.codes.asObservable();
+  }
 
-  doSearchbyCode(codes: Observable<any>, debounceMs = 400) {
+  doSearchbyCode(codes: Observable<any>) {
     return codes
       .pipe(
-        debounceTime(debounceMs),
-        distinctUntilChanged(),
         switchMap(code => this.rawSearchByCode(code)),
       )
   }
 
   rawSearchByCode(code): Observable<any> {
-    /** Uncomment if you have you want to active your barcode service to be validated from a URL
-     return this._http
-     .get(`${this.endpoints.search}${code}`)
-     .pipe(
-     catchError(this.handleError),
-     )
-     */
-    return of('Your Barcode Service Provider Sample Message');
+    // TODO add logic of code validation
+    const validatedCode: any = code;
+
+    this.codes.next(validatedCode);
+
+    return of(validatedCode);
 
   }
 
