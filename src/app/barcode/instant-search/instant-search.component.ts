@@ -12,34 +12,40 @@ import { FormControl } from '@angular/forms';
 export class InstantSearchComponent implements OnInit, AfterContentInit {
 
   message: string;
+  isSubmitReady: boolean;
 
-  private searchField: FormControl;
+  code$ = new Subject<any>();
 
   @ViewChild('barcodeInput') barcodeInput: ElementRef;
   @ViewChild('submitButton') submitButton: ElementRef;
 
-  code$ = new Subject<any>();
 
-  constructor(private barcodeValidator: BarcodeValidatorService) {}
+  constructor(private barcodeValidator: BarcodeValidatorService) {
+    this.isSubmitReady = false;
+  }
+
 
   ngOnInit() {
     this.barcodeValidator
-      .doSearchbyCode(this.code$)
-      .subscribe(
-        res => {
-          this.barcodeInput.nativeElement.value = res
-        },
-      );
+      .validateCodes(this.code$.asObservable())
+      .subscribe(res => this.onValidatedCode(res));
 
     this.barcodeValidator
       .validatedCodes
-      .subscribe(
-        res => {
-          this.barcodeInput.nativeElement.value = res;
-        },
-      ); // display value decoded by Quagga from camera
+      .subscribe(res => this.onValidatedCode(res)); // display value decoded by Quagga from camera
+  }
 
-    // this.submitButton.nativeElement.
+  onValidatedCode(code: string) {
+    this.barcodeInput.nativeElement.value = code;
+    this.setSubmitVisibility();
+  }
+
+  setSubmitVisibility() {
+    if (this.barcodeInput.nativeElement.value === '') {
+      this.isSubmitReady = false;
+    } else {
+      this.isSubmitReady = true;
+    }
   }
 
   onChange() {

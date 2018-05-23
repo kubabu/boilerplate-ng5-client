@@ -23,6 +23,10 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
     this.decoderService.onLiveStreamInit();
     this.decoderService.onDecodeProcessed();
 
+    this.barcodeValidator
+      .validateCodes(this.code$.asObservable(), true)
+      .subscribe();
+
     this.decoderService
       .onDecodeDetected()
       .then(code => {
@@ -30,9 +34,6 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
         this.decoderService.onPlaySound();
         this.code$.next(code);
       });
-
-    this.barcodeValidator
-      .doSearchbyCode(this.code$);
   }
 
   ngAfterContentInit() {

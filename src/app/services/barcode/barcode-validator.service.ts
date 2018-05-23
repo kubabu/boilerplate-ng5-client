@@ -11,28 +11,32 @@ export class BarcodeValidatorService {
   // This service checks if decoded barcode is allowed in given context
   public validatedCodes: Observable<any>;
 
-  private codes: Subject<any>;
+  private _codes: Subject<any>;
 
   constructor() {
-    this.codes = new Subject<any>();
-    this.validatedCodes = this.codes.asObservable();
+    this._codes = new Subject<any>();
+    this.validatedCodes = this._codes.asObservable();
   }
 
-  doSearchbyCode(codes: Observable<any>) {
+  validateCodes(codes: Observable<any>, enqueue = false): Observable<any> {
     return codes
       .pipe(
-        switchMap(code => this.rawSearchByCode(code)),
-      )
+        distinctUntilChanged(),
+        switchMap(code => {
+          const valCode = this.rawValidateCode(code);
+          if (enqueue) {
+            this._codes.next(code);
+          }
+          return valCode;
+        }),
+      );
   }
 
-  rawSearchByCode(code): Observable<any> {
+  rawValidateCode(code): Observable<any> {
     // TODO add logic of code validation
     const validatedCode: any = code;
 
-    this.codes.next(validatedCode);
-
     return of(validatedCode);
-
   }
 
   private handleError(error: any): Promise<any> {
@@ -40,4 +44,3 @@ export class BarcodeValidatorService {
   }
 
 }
-
