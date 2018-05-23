@@ -13,8 +13,8 @@ export class InstantSearchComponent implements OnInit, AfterContentInit {
 
   message: string;
   isSubmitReady: boolean;
-
   code$ = new Subject<any>();
+  barcodeInputControl: FormControl;
 
   @ViewChild('barcodeInput') barcodeInput: ElementRef;
   @ViewChild('submitButton') submitButton: ElementRef;
@@ -26,7 +26,11 @@ export class InstantSearchComponent implements OnInit, AfterContentInit {
 
 
   ngOnInit() {
-    this.barcodeValidator
+    this.barcodeInputControl = new FormControl();
+    this.barcodeInputControl.valueChanges
+      .subscribe(() => this.onChange());
+
+      this.barcodeValidator
       .validateCodes(this.code$.asObservable())
       .subscribe(res => this.onValidatedCode(res));
 
@@ -58,6 +62,6 @@ export class InstantSearchComponent implements OnInit, AfterContentInit {
 
   onSubmit() {
     // this.code$.next(this.barcodeInput.nativeElement.value);
-    // this.barcodeElement.nativeElement.value = ''; // continue somehow
+    // this.barcodeElement.nativeElement.value = ''; // TODO continue somehow
   }
 }
