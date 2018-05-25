@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterContentInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterContentInit, Input } from '@angular/core';
 import { BarcodeDecoderService } from '../../services/barcode/barcode-decoder.service';
 import { BarcodeValidatorService } from '../../services/barcode/barcode-validator.service';
 import { Subject } from 'rxjs/Subject';
@@ -13,13 +13,13 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
 
   lastResult: any;
   code$ = new Subject<any>();
+  @Input() barcodeFormat: string;
 
   @ViewChild('interactive') interactive;
 
   constructor(private decoderService: BarcodeDecoderService, private barcodeValidator: BarcodeValidatorService) {};
 
   ngOnInit() {
-
     this.decoderService.onLiveStreamInit();
     this.decoderService.onDecodeProcessed();
 

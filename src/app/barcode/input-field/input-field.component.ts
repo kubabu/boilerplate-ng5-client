@@ -16,7 +16,7 @@ export class InputFieldComponent implements OnInit, AfterContentInit {
   canSubmit = false;
   code$ = new Subject<any>();
 
-  @Input() barcodeFormat = 'any';
+  @Input() barcodeFormat: string;
   // @Output() detectedBarcode = new EventEmitter<string>();
   barcodeInputControl: FormControl;
 
