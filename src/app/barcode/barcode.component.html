@@ -1,11 +1,7 @@
 <mat-card class="text-center">
     <h2 class="text-center">Skanuj kod kreskowy</h2>
-    <app-instant-search barcodeFormat="none"></app-instant-search>
-    
-    <button class="app-button" mat-raised-button *ngIf="!showMedia" (click)="showMedia=true">
-        <mat-icon matSuffix>camera_alt</mat-icon>
-        OTWÓRZ WBUDOWANĄ KAMERĘ
-    </button>          
+    <app-input-field barcodeFormat="any"></app-input-field>
 
+    <app-open-media-stream *ngIf="!showMedia" (click)="showMedia=true"></app-open-media-stream>
     <app-media-stream *ngIf="showMedia"></app-media-stream>
 </mat-card>

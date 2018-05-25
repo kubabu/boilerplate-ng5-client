@@ -1,7 +1,4 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { InputFieldComponent } from './input-field.component';
 
@@ -11,9 +8,9 @@ describe('InputFieldComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputFieldComponent ]
-    })
-    .compileComponents();
+             declarations: [InputFieldComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

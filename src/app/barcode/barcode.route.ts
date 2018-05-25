@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MediaStreamComponent } from './media-stream/media-stream.component';
 import { InputFieldComponent } from './input-field/input-field.component';
-import { InstantSearchComponent } from './instant-search/instant-search.component';
 import { BarcodeComponent } from './barcode.component';
 import { OpenMediaStreamComponent } from './open-media-stream/open-media-stream.component';
 

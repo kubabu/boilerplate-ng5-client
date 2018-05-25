@@ -1,83 +1,70 @@
-import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit, AfterContentInit, ViewChild, ElementRef, Input, Output } from '@angular/core';
 import { BarcodeValidatorService } from '../../services/barcode/barcode-validator.service';
-import { BarcodeDecoderService } from '../../services/barcode/barcode-decoder.service';
 import { Subject } from 'rxjs/Subject';
+import { MatButton } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { EventEmitter } from 'events';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
 })
-export class InputFieldComponent implements OnInit, OnDestroy {
+export class InputFieldComponent implements OnInit, AfterContentInit {
 
-  @ViewChild('isbn') isbn;
-  @ViewChild('fileInputbox') fileInputbox;
-
-  resultUrl: any;
-  resultCode: any;
-  startProgress: boolean = false;
-  error: any;
-  message: string;
-
+  canSubmit = false;
   code$ = new Subject<any>();
 
+  @Input() barcodeFormat = 'any';
+  // @Output() detectedBarcode = new EventEmitter<string>();
+  barcodeInputControl: FormControl;
 
-  constructor(private sanitizer: DomSanitizer,
-              private barcodeValidator: BarcodeValidatorService,
-              private decoderService: BarcodeDecoderService) {}
+  @ViewChild('barcodeInput') barcodeInput: ElementRef;
+
+
+  constructor(private barcodeValidator: BarcodeValidatorService) {
+  }
+
 
   ngOnInit() {
-    this.barcodeValidator.validateCodes(this.code$)
-        .subscribe(
-          res => this.message = res,
-          err => {
-            this.message = `An Error! ${err.json().error}`
-          },
-        );
+    this.barcodeInputControl = new FormControl();
+    this.barcodeInputControl.valueChanges
+      .subscribe(() => this.onChange());
+
+      this.barcodeValidator
+      .validateCodes(this.code$.asObservable()) // pass here barcode format
+      .subscribe(res => this.onValidatedCode(res));
+
+    this.barcodeValidator
+      .validatedCodes$
+      .subscribe(res => this.onValidatedCode(res)); // display value decoded by Quagga from camera
   }
 
-  sanitize(url: string) {
-    return this.sanitizer.bypassSecurityTrustUrl(url);
+  onValidatedCode(code: string) {
+    this.barcodeInput.nativeElement.value = code;
+    this.setSubmitVisibility();
+    this.ngAfterContentInit();
   }
 
-  setStartProgress() {
-    this.startProgress = !this.startProgress;
+  setSubmitVisibility() {
+    if (this.barcodeInput.nativeElement.value === '') {
+      this.canSubmit = false;
+    } else {
+      this.canSubmit = true;
+    }
   }
 
-  onChange(e) {
-    const file = URL.createObjectURL(e.target.files[0]);
-    this.decoderService
-        .onDecodeSingle(file)
-        .then(code => {
-          this.setStartProgress();
-          this.resultUrl = this.sanitize(file);
-          this.isbn.value = code;
-          this.resultCode = code;
-          this.decoderService.onPlaySound();
-          this.code$.next(code);
-        })
-        .catch(e => {
-          this.resultUrl = '';
-          this.resultCode = '';
-          this.isbn.value = '';
-          this.setStartProgress();
-          this.error = `Something is wrong: ${e}`;
-        });
+  onChange() {
+    this.code$.next(this.barcodeInput.nativeElement.value);
   }
 
-  onCancel(e) {
-    this.setStartProgress();
-    this.error = `Something is wrong: Please Select An Image`;
+  ngAfterContentInit() {
+    this.barcodeInput.nativeElement.focus();
   }
 
-  onClick() {
-    this.setStartProgress();
-    this.fileInputbox.nativeElement.click();
-    this.error = null;
-  }
-
-  ngOnDestroy() {
-    console.info('Stopped!')
+  onSubmit() {
+    // this.code$.next(this.barcodeInput.nativeElement.value);
+    // this.barcodeElement.nativeElement.value = ''; // TODO continue somehow
   }
 }
