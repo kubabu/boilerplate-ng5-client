@@ -12,12 +12,14 @@ import { Subject } from 'rxjs/Subject';
 export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit {
 
   lastResult: any;
-  code$ = new Subject<any>();
+  code$: Subject<any>;
   @Input() barcodeFormat: string;
 
   @ViewChild('interactive') interactive;
 
-  constructor(private decoderService: BarcodeDecoderService, private barcodeValidator: BarcodeValidatorService) {};
+  constructor(private decoderService: BarcodeDecoderService, private barcodeValidator: BarcodeValidatorService) {
+    this.code$ = new Subject<any>();
+  };
 
   ngOnInit() {
     this.decoderService.onLiveStreamInit();

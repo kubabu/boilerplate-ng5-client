@@ -15,30 +15,41 @@ export class InputFieldComponent implements OnInit, AfterContentInit {
 
   canSubmit = false;
   code$ = new Subject<any>();
+  barcode: string;
 
   @Input() barcodeFormat: string;
-  // @Output() detectedBarcode = new EventEmitter<string>();
-  barcodeInputControl: FormControl;
+  @Output() detectedBarcode = new EventEmitter();
 
-  @ViewChild('barcodeInput') barcodeInput: ElementRef;
+  // two references to the same form input
+  barcodeInputControl: FormControl;       // to subscribe on value changes
+  @ViewChild('barcodeInput') barcodeInput: ElementRef;  // to focus on it afterInit
 
 
-  constructor(private barcodeValidator: BarcodeValidatorService) {
-  }
+  constructor(private barcodeValidator: BarcodeValidatorService) { }
 
 
   ngOnInit() {
     this.barcodeInputControl = new FormControl();
     this.barcodeInputControl.valueChanges
-      .subscribe(() => this.onChange());
+      .subscribe(res => this.onChange());
 
       this.barcodeValidator
       .validateCodes(this.code$.asObservable()) // pass here barcode format
-      .subscribe(res => this.onValidatedCode(res));
+      .subscribe(
+        res => this.onValidatedCode(res),
+        err => this.onError(err),
+    );
 
     this.barcodeValidator
       .validatedCodes$
-      .subscribe(res => this.onValidatedCode(res)); // display value decoded by Quagga from camera
+      .subscribe(
+        res => this.onValidatedCode(res),
+        err => this.onError(err),
+    ); // display value decoded by Quagga from camera
+  }
+
+  ngAfterContentInit() {
+    this.barcodeInput.nativeElement.focus();   // so external barcode reader can write as HID device, and to force submit visibility change
   }
 
   onValidatedCode(code: string) {
@@ -48,7 +59,8 @@ export class InputFieldComponent implements OnInit, AfterContentInit {
   }
 
   setSubmitVisibility() {
-    if (this.barcodeInput.nativeElement.value === '') {
+    if (this.barcodeInputControl.value === '') {
+    // if (this.barcodeInput.nativeElement.value === '') {
       this.canSubmit = false;
     } else {
       this.canSubmit = true;
@@ -56,15 +68,19 @@ export class InputFieldComponent implements OnInit, AfterContentInit {
   }
 
   onChange() {
-    this.code$.next(this.barcodeInput.nativeElement.value);
+    this.code$.next(this.barcodeInputControl.value);
   }
 
-  ngAfterContentInit() {
-    this.barcodeInput.nativeElement.focus();
+  onError(err: any) {
+
   }
 
   onSubmit() {
+    // send found barcode
     // this.code$.next(this.barcodeInput.nativeElement.value);
-    // this.barcodeElement.nativeElement.value = ''; // TODO continue somehow
+    this.detectedBarcode.emit(this.barcodeInputControl.value)
+    this.barcodeInput.nativeElement.value = '';
+
+    // TODO navigate back
   }
 }

@@ -2,7 +2,7 @@
     <mat-form-field class="example-full-width">
         <input matInput #barcodeInput 
             [formControl]="barcodeInputControl"
-            class="instantInput" placeholder="Kod kreskowy"
+            class="instantInput" placeholder="Wprowadź kod kreskowy"
             (keydown.enter)="onSubmit()" >
         <button mat-button matSuffix mat-icon-button aria-placeholder="Gotowe"
             *ngIf="canSubmit" (click)="onSubmit()">
