@@ -10,6 +10,7 @@ export const BARCODE_ROUTE: Routes = [
   {
     path: '',
     component: BarcodeComponent,
+    // do not use route for now
     // children: [
     //   {
     //     path: '',

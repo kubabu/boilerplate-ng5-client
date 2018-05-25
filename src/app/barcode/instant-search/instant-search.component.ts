@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { MatButton } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { EventEmitter } from 'events';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-instant-search',
@@ -12,7 +13,7 @@ import { EventEmitter } from 'events';
 })
 export class InstantSearchComponent implements OnInit, AfterContentInit {
 
-  isSubmitReady: boolean;
+  canSubmit = false;
   code$ = new Subject<any>();
 
   @Input() barcodeFormat = 'any';
@@ -20,11 +21,9 @@ export class InstantSearchComponent implements OnInit, AfterContentInit {
   barcodeInputControl: FormControl;
 
   @ViewChild('barcodeInput') barcodeInput: ElementRef;
-  @ViewChild('submitButton') submitButton: ElementRef;
 
 
   constructor(private barcodeValidator: BarcodeValidatorService) {
-    this.isSubmitReady = false;
   }
 
 
@@ -38,20 +37,21 @@ export class InstantSearchComponent implements OnInit, AfterContentInit {
       .subscribe(res => this.onValidatedCode(res));
 
     this.barcodeValidator
-      .validatedCodes
+      .validatedCodes$
       .subscribe(res => this.onValidatedCode(res)); // display value decoded by Quagga from camera
   }
 
   onValidatedCode(code: string) {
     this.barcodeInput.nativeElement.value = code;
     this.setSubmitVisibility();
+    this.ngAfterContentInit();
   }
 
   setSubmitVisibility() {
     if (this.barcodeInput.nativeElement.value === '') {
-      this.isSubmitReady = false;
+      this.canSubmit = false;
     } else {
-      this.isSubmitReady = true;
+      this.canSubmit = true;
     }
   }
 

@@ -4,7 +4,8 @@
             [formControl]="barcodeInputControl"
             class="instantInput" placeholder="Kod kreskowy"
             (keydown.enter)="onSubmit()" >
-        <button mat-button (click)="onSubmit()" *ngIf="isSubmitReady" matSuffix mat-icon-button aria-placeholder="Gotowe" >
+        <button mat-button matSuffix mat-icon-button aria-placeholder="Gotowe"
+            *ngIf="canSubmit" (click)="onSubmit()">
             <mat-icon >send</mat-icon>
         </button>
     </mat-form-field> 
