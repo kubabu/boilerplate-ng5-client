@@ -22,7 +22,7 @@ export class BarcodeDecoderService {
     });
   }
 
-  private setLiveStreamConfig() {
+  private setLiveStreamConfig(specifiedReaders: Array<string>) {
     DECODER_LIVE_CONFIG.inputStream = {
       type: 'LiveStream',
       constraints: {
@@ -35,11 +35,17 @@ export class BarcodeDecoderService {
         },
       },
     };
+
+    if (specifiedReaders.length > 0) {
+      DECODER_LIVE_CONFIG.decoder = {
+        readers : specifiedReaders,
+      }
+    }
     return DECODER_LIVE_CONFIG;
   }
 
-  onLiveStreamInit() {
-    const state = this.setLiveStreamConfig();
+  onLiveStreamInit(barcodeFormats: Array<string> = []) {
+    const state = this.setLiveStreamConfig(barcodeFormats);
     Quagga.init(state, (err) => {
       if (err) {
         return console.error(err);

@@ -22,7 +22,7 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
   };
 
   ngOnInit() {
-    this.decoderService.onLiveStreamInit();
+    this.decoderService.onLiveStreamInit(); // pass barcode formats here
     this.decoderService.onDecodeProcessed();
 
     this.barcodeValidator
