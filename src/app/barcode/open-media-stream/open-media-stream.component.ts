@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-dummy-placeholder',
+  selector: 'app-open-media-stream',
   templateUrl: './open-media-stream.component.html',
   styleUrls: ['./open-media-stream.component.scss'],
 })

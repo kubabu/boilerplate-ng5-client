@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ViewChild, ElementRef, Input, Output } from '@angular/core';
 import { BarcodeValidatorService } from '../../services/barcode/barcode-validator.service';
 import { Subject } from 'rxjs/Subject';
 import { MatButton } from '@angular/material';
 import { FormControl } from '@angular/forms';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-instant-search',
@@ -11,9 +12,11 @@ import { FormControl } from '@angular/forms';
 })
 export class InstantSearchComponent implements OnInit, AfterContentInit {
 
-  message: string;
   isSubmitReady: boolean;
   code$ = new Subject<any>();
+
+  @Input() barcodeFormat = 'any';
+  // @Output() detectedBarcode = new EventEmitter<string>();
   barcodeInputControl: FormControl;
 
   @ViewChild('barcodeInput') barcodeInput: ElementRef;
@@ -31,7 +34,7 @@ export class InstantSearchComponent implements OnInit, AfterContentInit {
       .subscribe(() => this.onChange());
 
       this.barcodeValidator
-      .validateCodes(this.code$.asObservable())
+      .validateCodes(this.code$.asObservable()) // pass here barcode format
       .subscribe(res => this.onValidatedCode(res));
 
     this.barcodeValidator

@@ -10,18 +10,18 @@ export const BARCODE_ROUTE: Routes = [
   {
     path: '',
     component: BarcodeComponent,
-    children: [
-      {
-        path: '',
-        component: OpenMediaStreamComponent,
-        pathMatch: 'full',
-      },
-      {
-        path: 'media',
-        component: MediaStreamComponent,
-        pathMatch: 'full',
-      },
-    ],
+    // children: [
+    //   {
+    //     path: '',
+    //     component: OpenMediaStreamComponent,
+    //     pathMatch: 'full',
+    //   },
+    //   {
+    //     path: 'media',
+    //     component: MediaStreamComponent,
+    //     pathMatch: 'full',
+    //   },
+    // ],
   },
 ];
 
