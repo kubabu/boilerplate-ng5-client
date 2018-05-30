@@ -3,7 +3,7 @@
         <input matInput #barcodeInput 
             [formControl]="barcodeInputControl"
             class="instantInput" placeholder="Wprowadź kod kreskowy"
-            autocomplete="false"
+            autocomplete="off"
             (keydown.enter)="onSubmit()" >
         <button mat-button matSuffix mat-icon-button aria-placeholder="Gotowe"
             *ngIf="canSubmit" (click)="onSubmit()">
