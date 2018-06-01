@@ -6,8 +6,8 @@ describe('MessageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        {provide: MessageService, useClass: MessageService }
-      ]
+        {provide: MessageService, useClass: MessageService },
+      ],
     });
   });
 

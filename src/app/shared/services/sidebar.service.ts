@@ -13,4 +13,9 @@ export class SidebarService {
     this.open = !this.open;
     this.toggleSource.next(this.open);
   }
+
+  close() {
+    this.open = false;
+    this.toggleSource.next(this.open);
+  }
 }

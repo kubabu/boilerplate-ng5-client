@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { SidenavItem } from './models/sidenav-item';
-import { SidebarService } from './services/sidebar.service';
+import { SidebarService } from './shared/services/sidebar.service';
 import { Title } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material';
 import { Observable } from 'rxjs/Observable';

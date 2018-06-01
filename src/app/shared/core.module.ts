@@ -4,7 +4,7 @@ import { BarcodeValidatorService } from '../barcode/services/barcode-validator.s
 import { UserService, UserHttpService } from '../services/user.service';
 import { SharedModule } from './shared.module';
 import { MessageService } from 'app/services/message.service';
-import { SidebarService } from '../services/sidebar.service';
+import { SidebarService } from '../shared/services/sidebar.service';
 import { ApiConfiguration } from '../config/api-config';
 
 @NgModule({
