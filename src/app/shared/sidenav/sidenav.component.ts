@@ -14,12 +14,12 @@ export class SidenavComponent implements OnInit {
   constructor(public sidebar: SidebarService) { }
 
   ngOnInit(): void {
-    this.sidebar.toggleMenu.subscribe(() => {
+    this.sidebar.toggleMenu$.subscribe(() => {
       this.sidenav.toggle()
     });
   }
 
-  toggleMenu() {
+  toggle() {
     this.sidebar.toggle();
   }
 }
