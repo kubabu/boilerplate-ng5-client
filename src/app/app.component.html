@@ -3,46 +3,16 @@
   <mat-sidenav #sidenav mode="over" color="primary">
       <mat-toolbar>
         <mat-toolbar-row> 
-          <!-- dummy placeholder -->
           <button mat-button class="app-sidebar-button" (click)="toggleSidenav()">
           ZWIŃ MENU
-          <!-- <mat-icon class="example-icon">account_circle</mat-icon> -->
           </button> 
         </mat-toolbar-row>
-    
-        <mat-toolbar-row>
-          <button mat-button class="app-sidebar-button"
-          (click)="toggleSidenav()" routerLink="">
-          STRONA GŁÓWNA
-          </button>
-        </mat-toolbar-row>
-    
-        <mat-toolbar-row>
-          <button mat-button class="app-sidebar-button" mat-tooltip="Heroes"
-          (click)="toggleSidenav()" routerLink="/heroes/all">
-          ZAMÓWIENIA
-          </button>
-        </mat-toolbar-row>
         
-        <mat-toolbar-row>
-          <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
-          (click)="toggleSidenav()" routerLink="/heroes/touch">
-          SWIPE DEMO
-          </button>
-        </mat-toolbar-row>
-        
-        <mat-toolbar-row>
-          <button mat-button class="app-sidebar-button" mat-tooltip="Dashboard"
-          (click)="toggleSidenav()" routerLink="/barcode">
-          CZYTNIK KODÓW
-          </button>
-        </mat-toolbar-row>
-    
-        <mat-toolbar-row>
+        <mat-toolbar-row *ngFor="let sidebarItem of sidenavItems">
           <button mat-button class="app-sidebar-button"
-          (click)="toggleSidenav()" routerLink="/heroes/messages">
-          WIADOMOŚCI ( 0 ) 
-          <!-- {{ messageService.messages.length }} ) -->
+          (click)="toggleSidenav()" routerLink="{{ sidebarItem.routerLink }}">
+          {{ sidebarItem.caption | uppercase }}
+          <mat-icon *ngIf="sidebarItem.icon" class="example-icon">{{ sidebarItem.icon }}</mat-icon>
           </button>
         </mat-toolbar-row>
     
