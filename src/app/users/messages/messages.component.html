@@ -1,0 +1,25 @@
+<div *ngIf="messages.length; then thenBlock else elseBlock"></div>
+  
+<ng-template #thenBlock>
+  <div class="app-content">
+    <mat-card *ngFor="let message of messages">
+      <mat-card-content>
+        <div> {{message}} </div>
+      </mat-card-content>
+    </mat-card>
+    
+    <button mat-raised-button color="warn" class="app-sidebar-button" class="clear"
+    (click)="clearMessages()">CLEAR MESSAGES
+  </button>  
+</div>
+</ng-template>
+
+<ng-template #elseBlock>
+  <div class="app-content">
+    <mat-card>
+      <mat-card-content>
+        <h2>No message to display</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>

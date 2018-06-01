@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, ViewChild, ElementRef, Input, Output } from '@angular/core';
-import { BarcodeValidatorService } from '../../services/barcode/barcode-validator.service';
+import { BarcodeValidatorService } from '../../barcode/services/barcode-validator.service';
 import { Subject } from 'rxjs/Subject';
 import { MatButton } from '@angular/material';
 import { FormControl } from '@angular/forms';

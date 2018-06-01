@@ -1,0 +1,23 @@
+.swipe-box {
+    display: block;
+    width: 100%;
+    float: left;
+    margin: 0;
+    
+}
+
+@media screen and (max-width: 600px)
+{
+    .swipe-image {
+        display: block;
+        width: 100%;
+    }
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}

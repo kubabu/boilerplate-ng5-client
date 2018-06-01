@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterContentInit, Input } from '@angular/core';
-import { BarcodeDecoderService } from '../../services/barcode/barcode-decoder.service';
-import { BarcodeValidatorService } from '../../services/barcode/barcode-validator.service';
+import { BarcodeDecoderService } from '../../barcode/services/barcode-decoder.service';
+import { BarcodeValidatorService } from '../../barcode/services/barcode-validator.service';
 import { Subject } from 'rxjs/Subject';
 
 

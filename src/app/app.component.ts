@@ -25,10 +25,10 @@ export class AppComponent implements OnInit {
     private titleService: Title) {
       this.sidenavItems$ = of([
         new SidenavItem({routerLink: '', caption: 'STRONA GŁÓWNA'}),
-        new SidenavItem({routerLink: '/heroes/all', caption: 'ZAMÓWIENIA'}),
-        new SidenavItem({routerLink: '/heroes/touch', caption: 'SWIPE DEMO'}),
+        new SidenavItem({routerLink: '/users/all', caption: 'ZAMÓWIENIA'}),
+        new SidenavItem({routerLink: '/users/touch', caption: 'SWIPE DEMO'}),
         new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
-        new SidenavItem({routerLink: '/heroes/messages', caption: 'wiadomości ( 0 )'}),
+        new SidenavItem({routerLink: '/users/messages', caption: 'wiadomości ( 0 )'}),
         new SidenavItem({routerLink: '', caption: 'Ustawienia', icon: 'account_circle'}),
       ]);
     }

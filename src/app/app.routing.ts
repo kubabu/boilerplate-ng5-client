@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NgModule } from '@angular/core';
 
-import { DashboardComponent } from './heroes/dashboard/dashboard.component';
+import { DashboardComponent } from './users/dashboard/dashboard.component';
 
 const ROOT_ROUTES: Routes = [
   {
@@ -12,8 +12,8 @@ const ROOT_ROUTES: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'heroes',
-    loadChildren: './heroes/heroes.module#HeroesModule',
+    path: 'users',
+    loadChildren: './users/users.module#UsersModule',
   },
   {
     path: 'barcode',

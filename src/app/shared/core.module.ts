@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { BarcodeDecoderService } from '../services/barcode/barcode-decoder.service';
-import { BarcodeValidatorService } from '../services/barcode/barcode-validator.service';
-import { HeroService, HeroHttpService } from '../services/hero.service';
+import { BarcodeDecoderService } from '../barcode/services/barcode-decoder.service';
+import { BarcodeValidatorService } from '../barcode/services/barcode-validator.service';
+import { UserService, UserHttpService } from '../services/user.service';
 import { SharedModule } from './shared.module';
 import { MessageService } from 'app/services/message.service';
 import { SidebarService } from '../services/sidebar.service';
@@ -16,7 +16,7 @@ import { ApiConfiguration } from '../config/api-config';
     SidebarService,
     BarcodeValidatorService,
     BarcodeDecoderService,
-    { provide: HeroService, useClass: HeroHttpService },
+    { provide: UserService, useClass: UserHttpService },
     MessageService,
   ],
   exports: [
