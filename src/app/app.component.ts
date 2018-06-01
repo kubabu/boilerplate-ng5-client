@@ -4,6 +4,8 @@ import { SidenavItem } from './models/sidenav-item';
 import { SidebarService } from './services/sidebar.service';
 import { Title } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-root',
@@ -16,19 +18,19 @@ export class AppComponent implements OnInit {
   title = 'ONIX Web client';
   @ViewChild('sidenav') sidenav: MatSidenav
 
-  sidenavItems: SidenavItem[];
+  sidenavItems$: Observable<SidenavItem[]>;
 
   constructor(private router: Router,
     private sidebar: SidebarService,
     private titleService: Title) {
-      this.sidenavItems = [
+      this.sidenavItems$ = of([
         new SidenavItem({routerLink: '', caption: 'STRONA GŁÓWNA'}),
         new SidenavItem({routerLink: '/heroes/all', caption: 'ZAMÓWIENIA'}),
         new SidenavItem({routerLink: '/heroes/touch', caption: 'SWIPE DEMO'}),
         new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
         new SidenavItem({routerLink: '/heroes/messages', caption: 'wiadomości ( 0 )'}),
         new SidenavItem({routerLink: '', caption: 'Ustawienia', icon: 'account_circle'}),
-      ];
+      ]);
     }
 
   ngOnInit() {

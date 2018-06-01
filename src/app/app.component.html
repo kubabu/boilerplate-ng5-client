@@ -8,7 +8,7 @@
           </button> 
         </mat-toolbar-row>
         
-        <mat-toolbar-row *ngFor="let sidebarItem of sidenavItems">
+        <mat-toolbar-row *ngFor="let sidebarItem of sidenavItems$ | async">
           <button mat-button class="app-sidebar-button"
           (click)="toggleSidenav()" routerLink="{{ sidebarItem.routerLink }}">
           {{ sidebarItem.caption | uppercase }}
