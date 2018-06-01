@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { FabMenuComponent } from './shared/fab-menu/fab-menu.component';
 import { CoreModule } from './shared/core.module';
@@ -16,7 +15,6 @@ import { HeroesModule } from 'app/heroes/heroes.module';
   declarations: [
     AppComponent,
     NotFoundComponent,
-    ToolbarComponent,
     SidenavComponent,
     FabMenuComponent,
   ],
