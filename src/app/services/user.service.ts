@@ -19,7 +19,7 @@ const httpOptions = {
 
 
 @Injectable()
-export class UserService {
+export abstract class UserService {
   getUser(id: number): Observable<User> {
     throw new Error('Method not implemented.');
   }

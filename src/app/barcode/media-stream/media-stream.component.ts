@@ -10,9 +10,7 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./media-stream.component.scss'],
 })
 export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit {
-
-  lastResult: any;
-  code$: Subject<any>;
+  private code$: Subject<any>;
   @Input() barcodeFormat: string;
 
   @ViewChild('interactive') interactive;
@@ -32,7 +30,6 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
     this.decoderService
       .onDecodeDetected()
       .then(code => {
-        this.lastResult = code;
         this.decoderService.onPlaySound();
         this.code$.next(code);
       });

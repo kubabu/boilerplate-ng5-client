@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-// tslint:disable-next-line:import-blacklist
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
+
 import { SidenavItem } from '../../models/sidenav-item';
 
 @Injectable()

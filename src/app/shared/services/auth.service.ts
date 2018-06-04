@@ -6,35 +6,41 @@ import 'rxjs/add/operator/map'
 import { User } from './../../models/user';
 import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
+import { HttpClient } from '@angular/common/http';
+import { ApiConfiguration } from '../../config/api-config';
 
 @Injectable()
 export class AuthenticationService {
 
-    user: User;
+  user: User;
+  authUrl: string;
 
-    constructor(private router: Router,
-              private http: Http,
-              private menu: SidebarService,
-  ) { }
+  constructor(
+    private apiConfig: ApiConfiguration,
+    private http: HttpClient,
+    private menu: SidebarService,
+    private router: Router,
+  ) {
+    this.authUrl = apiConfig.ApiUrl + '/auth';
+  }
 
 
   login(username: string, password: string) {
 
-
-    const user: User = new User({
+    const t_user: User = new User({
       id: 1,
       name: 'Admin',
     });
     //   lastName: 'Admin',
     //   username: username,
     //   password: password
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('currentUser', JSON.stringify(t_user));
     this.router.navigate(['/']);
 
-    // return this.http.post(this.config.apiUrl + '/users/authenticate', { username: username, password: password })
+    // return this.http.post(this.authUrl, { username: username, password: password })
     //   .map((response: Response) => {
     //     // login successful if there's a jwt token in the response
-    //     let user = response.json();
+    //     const user = response.json();
     //     if (user && user.token) {
     //       // store user details and jwt token in local storage to keep user logged in between page refreshes
     //       localStorage.setItem('currentUser', JSON.stringify(user));
@@ -50,7 +56,6 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
-
   }
 
   public isAuthenticated(): boolean {
@@ -59,7 +64,7 @@ export class AuthenticationService {
     return (user != null);
   }
 
-
+  // todo: urlAfterAuth: string = ''
   public handleAuthentication(): void {
     if (!this.isAuthenticated()) {
       this.router.navigate(['/login']);

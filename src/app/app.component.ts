@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { SidenavItem } from './models/sidenav-item';
-import { SidebarService } from './shared/services/sidebar.service';
 import { Title } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+
+import { AuthenticationService } from './shared/services/auth.service';
+import { SidenavItem } from './models/sidenav-item';
+import { SidebarService } from './shared/services/sidebar.service';
+
 
 @Component({
   selector: 'app-root',
@@ -17,13 +20,16 @@ export class AppComponent implements OnInit {
   isDarkTheme = false;
   title = 'ONIX Web client';
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
+    private auth: AuthenticationService,
     public sidebar: SidebarService,
     private titleService: Title) { }
 
   ngOnInit() {
     this.titleService.setTitle( this.title );
 
+    // this.auth.handleAuthentication();
     this.router.navigateByUrl('/barcode')
   }
 

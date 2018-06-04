@@ -6,6 +6,7 @@ import { SharedModule } from './shared.module';
 import { MessageService } from 'app/services/message.service';
 import { SidebarService } from '../shared/services/sidebar.service';
 import { ApiConfiguration } from '../config/api-config';
+import { AuthenticationService } from './services/auth.service';
 
 @NgModule({
   imports: [
@@ -13,11 +14,12 @@ import { ApiConfiguration } from '../config/api-config';
   ],
   providers: [
     ApiConfiguration,
-    SidebarService,
+    AuthenticationService,
     BarcodeValidatorService,
     BarcodeDecoderService,
     { provide: UserService, useClass: UserHttpService },
     MessageService,
+    SidebarService,
   ],
   exports: [
     SharedModule,

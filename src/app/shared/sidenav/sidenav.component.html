@@ -1,16 +1,20 @@
 <mat-sidenav #sidenav mode="over" color="primary">
   <mat-toolbar>
     <mat-toolbar-row> 
-      <button mat-button class="app-sidebar-button" (click)="toggle()">
-      ZWIŃ MENU
+      <button mat-button class="app-sidebar-button" 
+        (click)="toggle()">
+        ZWIŃ MENU
       </button> 
     </mat-toolbar-row>
     
     <mat-toolbar-row *ngFor="let sidebarItem of sidebar.items$ | async">
       <button mat-button class="app-sidebar-button"
-      (click)="toggle()" routerLink="{{ sidebarItem.routerLink }}">
-      {{ sidebarItem.caption | uppercase }}
-      <mat-icon *ngIf="sidebarItem.icon" class="example-icon">{{ sidebarItem.icon }}</mat-icon>
+        (click)="toggle()" 
+        routerLink="{{ sidebarItem.routerLink }}">
+        {{ sidebarItem.caption | uppercase }}
+        <mat-icon *ngIf="sidebarItem.icon" class="example-icon">
+          {{ sidebarItem.icon }}
+        </mat-icon>
       </button>
     </mat-toolbar-row>
 
