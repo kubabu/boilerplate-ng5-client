@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BarcodeDecoderService } from '../barcode/services/barcode-decoder.service';
 import { BarcodeValidatorService } from '../barcode/services/barcode-validator.service';
-import { UserService, UserHttpService } from '../services/user.service';
+import { UserService } from '../services/user.service';
 import { SharedModule } from './shared.module';
 import { MessageService } from 'app/services/message.service';
 import { SidebarService } from '../shared/services/sidebar.service';
@@ -17,7 +17,7 @@ import { AuthenticationService } from './services/auth.service';
     AuthenticationService,
     BarcodeValidatorService,
     BarcodeDecoderService,
-    { provide: UserService, useClass: UserHttpService },
+    UserService,
     MessageService,
     SidebarService,
   ],

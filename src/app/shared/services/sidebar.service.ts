@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
 
-import { SidenavItem } from '../../models/sidenav-item';
+import { SidenavItem } from 'app/models/sidenav-item';
 
 @Injectable()
 export class SidebarService {
@@ -21,7 +21,7 @@ export class SidebarService {
       new SidenavItem({routerLink: '/users/touch', caption: 'SWIPE DEMO'}),
       new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
       new SidenavItem({routerLink: '/users/messages', caption: 'wiadomości ( 0 )'}),
-      new SidenavItem({routerLink: '', caption: 'Ustawienia', icon: 'account_circle'}),
+      new SidenavItem({routerLink: '/login', caption: 'Login', icon: 'account_circle'}),
     ]);
   }
 

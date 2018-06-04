@@ -3,11 +3,11 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
-import { User } from './../../models/user';
+import { User } from 'app/models/user';
 import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
 import { HttpClient } from '@angular/common/http';
-import { ApiConfiguration } from '../../config/api-config';
+import { ApiConfiguration } from 'app/config/api-config';
 
 @Injectable()
 export class AuthenticationService {
@@ -31,9 +31,7 @@ export class AuthenticationService {
       id: 1,
       name: 'Admin',
     });
-    //   lastName: 'Admin',
-    //   username: username,
-    //   password: password
+
     localStorage.setItem('currentUser', JSON.stringify(t_user));
     this.router.navigate(['/']);
 

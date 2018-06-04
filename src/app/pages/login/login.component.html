@@ -1,0 +1,32 @@
+<mat-card class="text-center">
+  <h1 class="title">Uwierzytelnienie wymagane</h1>
+  <form>
+    <mat-form-field>
+      <input matInput #username 
+        type="text" id="Username"
+        placeholder="Nazwa użytkownika"/>
+    </mat-form-field>
+
+    <mat-form-field class="input-container">
+      <input matInput #pass 
+        type="password" id="Password"
+        placeholder="Hasło"/>
+    </mat-form-field>
+    
+    <button mat-button (click)="login(username.value, pass.value)">
+      Zaloguj się
+    </button>
+  </form>
+</mat-card>
+
+<!-- 
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Leave a comment"></textarea>
+    </mat-form-field>
+  </form>
+   -->

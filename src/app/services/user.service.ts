@@ -7,8 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { retry } from 'rxjs/operators/retry';
 import { concat } from 'rxjs/observable/concat';
 
-import { ApiConfiguration } from '../config/api-config';
-import { User } from '../models/user';
+import { ApiConfiguration } from 'app/config/api-config';
+import { User } from 'app/models/user';
 import { MessageService } from './message.service';
 
 
@@ -18,31 +18,9 @@ const httpOptions = {
 
 
 
-@Injectable()
-export abstract class UserService {
-  getUser(id: number): Observable<User> {
-    throw new Error('Method not implemented.');
-  }
-  getUsers(): Observable<User[]> {
-    throw new Error('Method not implemented.');
-  }
-  updateUser(user: User): Observable<any> {
-    throw new Error('Method not implemented.');
-  }
-  addUser(user: User): Observable<any> {
-    throw new Error('Method not implemented.');
-  }
-  deleteUser(user: number | User): Observable<any> {
-    throw new Error('Method not implemented.');
-  }
-  searchUsers(term: string): Observable<User[]> {
-    throw new Error('Method not implemented.');
-  }
-}
-
 
 @Injectable()
-export class UserHttpService extends UserService {
+export class UserService {
 
   private usersUrl;
 
@@ -51,7 +29,6 @@ export class UserHttpService extends UserService {
     private messageService: MessageService,
     private apiConfig: ApiConfiguration,
   ) {
-    super();
     this.usersUrl = apiConfig.ApiUrl + '/users';
    }
 
