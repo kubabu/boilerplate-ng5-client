@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -10,12 +9,6 @@ import { concat } from 'rxjs/observable/concat';
 import { ApiConfiguration } from 'app/config/api-config';
 import { User } from 'app/models/user';
 import { MessageService } from './message.service';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
-
 
 
 
@@ -77,14 +70,14 @@ export class UserService {
   updateUser(user: User): Observable<any> {
     const url = `${this.usersUrl}/${user.id}`;
 
-    return this.http.put(url, user, httpOptions).pipe(
+    return this.http.put(url, user, this.apiConfig.httpOptions).pipe(
       tap(_ => this.log(`updated user id=${user.id}`)),
       catchError(this.handleError<any>('updateuser')),
     );
   }
 
   addUser(user: User): Observable<any> {
-    return this.http.post(this.usersUrl, user, httpOptions).pipe(
+    return this.http.post(this.usersUrl, user, this.apiConfig.httpOptions).pipe(
       tap(_ => this.log(`added user id=${user.id}`)),
       catchError(this.handleError<any>('adduser')),
     );
@@ -94,7 +87,7 @@ export class UserService {
     const id = typeof user === 'number' ? user : user.id;
     const url = `${this.usersUrl}/${id}`;
 
-    return this.http.delete(url, httpOptions).pipe(
+    return this.http.delete(url, this.apiConfig.httpOptions).pipe(
       tap(_ => this.log(`deleted user id=${id}`)),
       catchError(this.handleError<any>('deleteuser')),
     );

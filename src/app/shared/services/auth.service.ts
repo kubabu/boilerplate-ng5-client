@@ -1,51 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { SidebarService } from './sidebar.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 import { User } from 'app/models/user';
-import { Router } from '@angular/router';
-import { SidebarService } from './sidebar.service';
-import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration } from 'app/config/api-config';
+import { TokenRequest } from 'app/models/token-request';
+import { UserService } from '../../services/user.service';
+
 
 @Injectable()
 export class AuthenticationService {
 
   user: User;
   authUrl: string;
+  usersUrl: string;
 
   constructor(
     private apiConfig: ApiConfiguration,
     private http: HttpClient,
     private menu: SidebarService,
     private router: Router,
+    private userservice: UserService,
   ) {
     this.authUrl = apiConfig.ApiUrl + '/auth';
+    this.usersUrl = apiConfig.ApiUrl + '/users';
   }
 
+  usersReq(username: string): Observable<any> {
+    return this.http.get<User[]>(this.usersUrl);
+  }
 
-  login(username: string, password: string) {
+  loginRequest(username: string, password: string) {
+    const tokenRequest = new TokenRequest();
+    tokenRequest.Username = username;
+    tokenRequest.Password = password;
 
-    const t_user: User = new User({
-      id: 1,
-      name: 'Admin',
-    });
+    return this.http.post(this.authUrl, tokenRequest, this.apiConfig.httpOptions)
+      .subscribe(this.onTokenResponse);
+  }
 
-    localStorage.setItem('currentUser', JSON.stringify(t_user));
-    this.router.navigate(['/']);
-
-    // return this.http.post(this.authUrl, { username: username, password: password })
-    //   .map((response: Response) => {
-    //     // login successful if there's a jwt token in the response
-    //     const user = response.json();
-    //     if (user && user.token) {
-    //       // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //       localStorage.setItem('currentUser', JSON.stringify(user));
-    //     }
-    //   });
-
-
+  onTokenResponse(response: Response) {
+    // login successful if there's a jwt token in the response
+    const respJson = response.json();
+    const user = respJson.user;
+    if (user && user.token) {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      // this.router.navigate(['/']);
+    }
   }
 
   logout() {
