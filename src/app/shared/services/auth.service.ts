@@ -10,10 +10,17 @@ import { User } from 'app/models/user';
 import { ApiConfiguration } from 'app/config/api-config';
 import { TokenRequest } from 'app/models/token-request';
 import { UserService } from '../../services/user.service';
+import { tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+import { TokenResponse } from 'app/models/token-response';
 
 
 @Injectable()
 export class AuthenticationService {
+
+  private _log: string[];
+  private userKey = 'currentUser';
+  private tokenKey = 'currentToken';
 
   user: User;
   authUrl: string;
@@ -27,7 +34,7 @@ export class AuthenticationService {
     private userservice: UserService,
   ) {
     this.authUrl = apiConfig.ApiUrl + '/auth';
-    this.usersUrl = apiConfig.ApiUrl + '/users';
+    this._log = [];
   }
 
   usersReq(username: string): Observable<any> {
@@ -39,17 +46,24 @@ export class AuthenticationService {
     tokenRequest.Username = username;
     tokenRequest.Password = password;
 
-    return this.http.post(this.authUrl, tokenRequest, this.apiConfig.httpOptions)
+    this.loginPost(tokenRequest)
       .subscribe(this.onTokenResponse);
   }
 
-  onTokenResponse(response: Response) {
+  loginPost(tokenRequest: TokenRequest): Observable<any> {
+    return this.http.post(this.authUrl, tokenRequest, this.apiConfig.httpOptions).pipe(
+      tap(_ => this._log.push(`added user id=${tokenRequest.Username}`)),
+      catchError(this.handleError<any>('adduser')),
+    );
+  }
+
+  onTokenResponse(response: TokenResponse) {
     // login successful if there's a jwt token in the response
-    const respJson = response.json();
-    const user = respJson.user;
-    if (user && user.token) {
+    if (response.user && response.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('currentUser', JSON.stringify(user));
+      const validTo = new Date(Date.parse(response.validTo));
+      localStorage.setItem(this.userKey, JSON.stringify(response.user));
+      localStorage.setItem(this.tokenKey, response.token);
       // this.router.navigate(['/']);
     }
   }
@@ -58,14 +72,29 @@ export class AuthenticationService {
     this.menu.close();
 
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem(this.userKey);
     this.router.navigate(['/login']);
   }
 
   public isAuthenticated(): boolean {
 
-    const user = localStorage.getItem('currentUser');
+    const user = localStorage.getItem(this.userKey);
+    // check if token is still valid
     return (user != null);
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this._log.push(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
   // todo: urlAfterAuth: string = ''
