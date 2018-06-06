@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -18,9 +17,7 @@ import { AuthenticationStoreService } from 'app/services/auth/auth-store.service
 export class AuthenticationService {
 
   private user: User;
-  private erorrSubject$: Subject<string>;
-  errorMessage$: Observable<string>;
-
+  isAuthd$: Observable<boolean>;
 
   constructor(
     private authConfig: AuthenticationConfiguration,
@@ -28,10 +25,7 @@ export class AuthenticationService {
     private authStore: AuthenticationStoreService,
     private menu: SidebarService,
     private router: Router,
-  ) {
-    this.erorrSubject$ = new Subject<string>();
-    this.errorMessage$ = this.erorrSubject$.asObservable();
-  }
+  ) { }
 
   login(username: string, password: string) {
     const tokenRequest = new TokenRequest();
@@ -41,7 +35,7 @@ export class AuthenticationService {
     this.authConnector.loginRequest(tokenRequest)
       .subscribe(
         resp => this.onTokenResponse(resp),
-        err => this.onLoginError(err),
+        // err => this.onLoginError(err),
       );
   }
 
@@ -49,20 +43,9 @@ export class AuthenticationService {
     // login successful if there's a jwt token in the response
     if (response != null && response.user && response.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      this.erorrSubject$.next('');
       this.authStore.saveToken(response);
-
-      const startupUri = response.user.startupUri;
-      if (startupUri != null && startupUri !== '') {
-        this.router.navigate([startupUri]);
-      } else {
-        this.router.navigate(['/']);
-      }
+      this.navigateAfterLogin();
     }
-  }
-
-  onLoginError(response: HttpErrorResponse) {
-    this.erorrSubject$.next(response.error);
   }
 
   logout() {
@@ -81,6 +64,20 @@ export class AuthenticationService {
   public handleAuthentication(): void {
     if (!this.isAuthenticated()) {
       this.router.navigate([this.authConfig.loginRoute]);
+    } else {
+      this.navigateAfterLogin();
+    }
+  }
+
+  navigateAfterLogin() {
+    const token = this.authStore.getToken();
+    if (token != null) {
+      const startupUri = token.user.startupUri;
+      if (startupUri != null && startupUri !== '') {
+        this.router.navigate([startupUri]);
+      } else {
+        this.router.navigate(['/']);
+      }
     }
   }
 }

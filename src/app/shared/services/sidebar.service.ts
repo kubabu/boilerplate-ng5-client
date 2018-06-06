@@ -17,6 +17,7 @@ export class SidebarService {
   constructor() {
     this.items$ = of([
       new SidenavItem({routerLink: '', caption: 'STRONA GŁÓWNA'}),
+      new SidenavItem({routerLink: '/', caption: 'STRONA GŁÓWNA/'}),
       new SidenavItem({routerLink: '/users/all', caption: 'ZAMÓWIENIA'}),
       new SidenavItem({routerLink: '/users/touch', caption: 'SWIPE DEMO'}),
       new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),

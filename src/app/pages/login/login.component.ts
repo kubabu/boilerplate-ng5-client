@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from 'app/services/auth/auth.service';
+import { AuthConnectorService } from '../../services/auth/auth-connector.service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthenticationService,
+    private authConn: AuthConnectorService,
   ) {
-    this.errorMessage = auth.errorMessage$;
+    this.errorMessage = authConn.errorMessage$;
   }
 
 

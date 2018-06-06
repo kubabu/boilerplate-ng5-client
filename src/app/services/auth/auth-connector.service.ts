@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 import { ApiConfiguration } from 'app/config/api-config';
 import { TokenRequest } from 'app/models/token-request';
 import { TokenResponse } from 'app/models/token-response';
@@ -11,6 +12,8 @@ import { TokenResponse } from 'app/models/token-response';
 export class AuthConnectorService {
 
   private authUrl: string;
+  private erorrSubject$: Subject<string>;
+  errorMessage$: Observable<string>;
 
   constructor(
     private apiConfig: ApiConfiguration,
@@ -18,10 +21,27 @@ export class AuthConnectorService {
 
   ) {
     this.authUrl = apiConfig.ApiUrl + '/auth';
+    this.erorrSubject$ = new Subject<string>();
+    this.errorMessage$ = this.erorrSubject$.asObservable();
   }
 
   loginRequest(tokenRequest: TokenRequest): Observable<any> {
-    return this.http.post(this.authUrl, tokenRequest, this.apiConfig.httpOptions);
+
+    return this.http.post(this.authUrl, tokenRequest, this.apiConfig.httpOptions).pipe(
+      tap(_ => this.erorrSubject$.next('')),
+      catchError(this.handleError<any>('loginRequest')),
+    );
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: better job of transforming error for user consumption
+      this.erorrSubject$.next(error.error);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
 }

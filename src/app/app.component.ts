@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
     this.titleService.setTitle( this.title );
 
     this.auth.handleAuthentication();
-    // this.router.navigateByUrl('/barcode')
   }
 
   toggleSidenav() {
