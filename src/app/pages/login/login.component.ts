@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from 'app/shared/services/auth.service';
 
 @Component({
@@ -8,9 +9,15 @@ import { AuthenticationService } from 'app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  errorMessage: Observable<string>;
+
+
   constructor(
     private auth: AuthenticationService,
-  ) { }
+  ) {
+    this.errorMessage = auth.errorMessage$;
+  }
+
 
   ngOnInit() { }
 

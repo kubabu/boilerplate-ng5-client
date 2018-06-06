@@ -17,4 +17,5 @@
       Zaloguj się
     </button>
   </form>
+  <h2 *ngIf="errorMessage">{{ errorMessage | async }}</h2>
 </mat-card>

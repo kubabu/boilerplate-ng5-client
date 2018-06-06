@@ -5,7 +5,7 @@ import { AuthenticationStoreService } from './auth-store.service';
 describe('AuthStoreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthenticationStoreService]
+      providers: [AuthenticationStoreService],
     });
   });
 
