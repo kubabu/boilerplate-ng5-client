@@ -7,6 +7,8 @@ import { MessageService } from 'app/services/message.service';
 import { SidebarService } from '../shared/services/sidebar.service';
 import { ApiConfiguration } from '../config/api-config';
 import { AuthenticationService } from './services/auth.service';
+import { AuthConnectorService } from 'app/shared/services/auth-connector.service';
+import { AuthenticationConfiguration } from '../config/auth-config';
 
 @NgModule({
   imports: [
@@ -14,6 +16,8 @@ import { AuthenticationService } from './services/auth.service';
   ],
   providers: [
     ApiConfiguration,
+    AuthenticationConfiguration,
+    AuthConnectorService,
     AuthenticationService,
     BarcodeValidatorService,
     BarcodeDecoderService,
