@@ -15,6 +15,7 @@ export class AuthConnectorService {
   private erorrSubject$: Subject<string>;
   errorMessage$: Observable<string>;
 
+
   constructor(
     private apiConfig: ApiConfiguration,
     private http: HttpClient,
@@ -24,6 +25,7 @@ export class AuthConnectorService {
     this.erorrSubject$ = new Subject<string>();
     this.errorMessage$ = this.erorrSubject$.asObservable();
   }
+
 
   loginRequest(tokenRequest: TokenRequest): Observable<any> {
 

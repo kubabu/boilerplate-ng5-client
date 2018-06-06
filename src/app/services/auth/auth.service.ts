@@ -11,13 +11,15 @@ import { User } from 'app/models/user';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { SidebarService } from 'app/shared/services/sidebar.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
 export class AuthenticationService {
 
-  private user: User;
-  isAuthd$: Observable<boolean>;
+  // private user: User;
+  private isAuthenticatedSource$: BehaviorSubject<boolean>;
+  public isAuthenticated$: Observable<boolean>;
 
   constructor(
     private authConfig: AuthenticationConfiguration,
@@ -25,7 +27,10 @@ export class AuthenticationService {
     private authStore: AuthenticationStoreService,
     private menu: SidebarService,
     private router: Router,
-  ) { }
+  ) {
+    this.isAuthenticatedSource$ = new BehaviorSubject<boolean>(false);
+    this.isAuthenticated$ = this.isAuthenticatedSource$.asObservable();
+  }
 
   login(username: string, password: string) {
     const tokenRequest = new TokenRequest();
@@ -35,7 +40,6 @@ export class AuthenticationService {
     this.authConnector.loginRequest(tokenRequest)
       .subscribe(
         resp => this.onTokenResponse(resp),
-        // err => this.onLoginError(err),
       );
   }
 
@@ -44,6 +48,8 @@ export class AuthenticationService {
     if (response != null && response.user && response.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       this.authStore.saveToken(response);
+      this.isAuthenticatedSource$.next(true);
+      // TODO create observable to check if its still authenticated
       this.navigateAfterLogin();
     }
   }
@@ -51,10 +57,11 @@ export class AuthenticationService {
   logout() {
     this.menu.close();
     this.authStore.clearToken();
+    this.isAuthenticatedSource$.next(false);
     this.router.navigate([this.authConfig.loginRoute]);
   }
 
-  public isAuthenticated(): boolean {
+  private isAuthenticated(): boolean {
     // check if token is still valid
     const token = this.authStore.getToken();
 
