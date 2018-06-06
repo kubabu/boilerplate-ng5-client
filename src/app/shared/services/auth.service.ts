@@ -38,8 +38,9 @@ export class AuthenticationService {
       const validTo = new Date(Date.parse(response.validTo));
       localStorage.setItem(authConfig.userKey, JSON.stringify(response.user));
       localStorage.setItem(authConfig.tokenKey, response.token);
+      localStorage.setItem(authConfig.validToKey, response.validTo);
 
-      // this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -51,12 +52,29 @@ export class AuthenticationService {
     this.router.navigate([this.authConfig.loginRoute]);
   }
 
+  validTo(): Date {
+    const validTo = localStorage.getItem(this.authConfig.validToKey);
+    return this.parseValidTo(validTo);
+  }
+
+  private parseValidTo(validTo: string): Date {
+    return new Date(Date.parse(validTo));
+  }
+
+  public isValidYet(): boolean {
+    const validTo = this.validTo();
+    const now = new Date();
+    const isValidYet = validTo > now;
+
+    return isValidYet;
+  }
+
   public isAuthenticated(): boolean {
 
     const user = localStorage.getItem(this.authConfig.userKey);
     const token = localStorage.getItem(this.authConfig.tokenKey);
     // check if token is still valid
-    return (user != null && token != null);
+    return (user != null && token != null && this.isValidYet());
   }
 
   // todo: urlAfterAuth: string = ''
