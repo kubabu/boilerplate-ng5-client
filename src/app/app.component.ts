@@ -5,7 +5,7 @@ import { MatSidenav } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { AuthenticationService } from 'app/shared/services/auth.service';
+import { AuthenticationService } from 'app/services/auth/auth.service';
 import { SidenavItem } from 'app/models/sidenav-item';
 import { SidebarService } from 'app/shared/services/sidebar.service';
 

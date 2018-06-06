@@ -5,7 +5,7 @@ import { AuthConnectorService } from './auth-connector.service';
 describe('AuthConnectorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthConnectorService]
+      providers: [AuthConnectorService],
     });
   });
 

@@ -7,9 +7,9 @@ import { UserService } from 'app/services/user.service';
 import { MessageService } from 'app/services/message.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { SidebarService } from 'app/shared/services/sidebar.service';
-import { AuthConnectorService } from 'app/shared/services/auth-connector.service';
-import { AuthenticationService } from 'app/shared/services/auth.service';
-import { AuthenticationStoreService } from 'app/shared/services/auth-store.service';
+import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
+import { AuthenticationService } from 'app/services/auth/auth.service';
+import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 
 @NgModule({
   imports: [

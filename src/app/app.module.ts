@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from 'app/app.routing';
 import { AppComponent } from 'app/app.component';
-import { NotFoundComponent } from 'app/not-found/not-found.component';
 import { SidenavComponent } from 'app/shared/sidenav/sidenav.component';
 import { FabMenuComponent } from 'app/shared/fab-menu/fab-menu.component';
 import { CoreModule } from 'app/shared/core.module';
@@ -15,7 +14,6 @@ import { PagesModule } from 'app/pages/pages.module';
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent,
     SidenavComponent,
     FabMenuComponent,
   ],

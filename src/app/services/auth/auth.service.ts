@@ -9,9 +9,9 @@ import { TokenLocalStorageItem } from 'app/models/token-local-item';
 import { TokenRequest } from 'app/models/token-request';
 import { TokenResponse } from 'app/models/token-response';
 import { User } from 'app/models/user';
-import { AuthConnectorService } from 'app/shared/services/auth-connector.service';
+import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { SidebarService } from 'app/shared/services/sidebar.service';
-import { AuthenticationStoreService } from 'app/shared/services/auth-store.service';
+import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 
 
 @Injectable()

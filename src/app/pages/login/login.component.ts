@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from 'app/shared/services/auth.service';
+import { AuthenticationService } from 'app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
