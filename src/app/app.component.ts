@@ -32,12 +32,4 @@ export class AppComponent implements OnInit {
     this.auth.handleAuthentication();
   }
 
-  // openSidenav() {
-  //   this.sidebar.open();
-  // }
-
-  // openSidenav() {
-  //   this.sidebar.open();
-  // }
-
 }
