@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { timer } from 'rxjs/observable/timer';
 import { Subject } from 'rxjs/Subject';
 
 import { AuthenticationConfiguration } from 'app/config/auth-config';
@@ -17,7 +18,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class AuthenticationService {
 
-  // private user: User;
+  private tokenRequest: TokenRequest;
   private isAuthenticatedSource$: BehaviorSubject<boolean>;
   public isAuthenticated$: Observable<boolean>;
 
@@ -32,11 +33,12 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    const tokenRequest = new TokenRequest();
-    tokenRequest.Username = username;
-    tokenRequest.Password = password;
+    // save token request data to resent before expiration
+    this.tokenRequest = new TokenRequest();
+    this.tokenRequest.Username = username;
+    this.tokenRequest.Password = password;
 
-    this.authConnector.loginRequest(tokenRequest)
+    this.authConnector.loginRequest(this.tokenRequest)
       .subscribe(
         resp => this.onTokenResponse(resp),
       );
@@ -49,7 +51,21 @@ export class AuthenticationService {
       this.authStore.saveToken(response);
       this.isAuthenticatedSource$.next(true);
       this.navigateAfterLogin();
+
+      // setup observable timer to request new token just before this one expires
+      // const responseObject = new TokenLocalStorageItem(response);
+      // TODO: test
+      // this.setReloadTimer(responseObject.validTo)
+      //   .subscribe(_ => this.login(this.tokenRequest.Username, this.tokenRequest.Password));
     }
+  }
+
+  setReloadTimer(when: Date): Observable<number> {
+    const now = new Date();
+    const second = 1000; // call one second before expiration
+    const expirationTimedelta = when.getTime() - now.getTime() - second;
+
+    return timer(expirationTimedelta);
   }
 
   logout() {
@@ -65,6 +81,7 @@ export class AuthenticationService {
     return token != null && token.isValid();
   }
 
+  // todo: move to separate Auth navigation service
   public handleAuthentication(): void {
     if (!this.isAuthenticated()) {
       this.navigateToLogin();
