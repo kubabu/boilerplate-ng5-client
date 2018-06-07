@@ -25,7 +25,6 @@ export class AuthenticationService {
     private authConfig: AuthenticationConfiguration,
     private authConnector: AuthConnectorService,
     private authStore: AuthenticationStoreService,
-    private menu: SidebarService,
     private router: Router,
   ) {
     this.isAuthenticatedSource$ = new BehaviorSubject<boolean>(false);
@@ -49,16 +48,14 @@ export class AuthenticationService {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       this.authStore.saveToken(response);
       this.isAuthenticatedSource$.next(true);
-      // TODO create observable to check if its still authenticated
       this.navigateAfterLogin();
     }
   }
 
   logout() {
-    this.menu.close();
     this.authStore.clearToken();
     this.isAuthenticatedSource$.next(false);
-    this.router.navigate([this.authConfig.loginRoute]);
+    this.navigateToLogin();
   }
 
   private isAuthenticated(): boolean {
@@ -70,7 +67,7 @@ export class AuthenticationService {
 
   public handleAuthentication(): void {
     if (!this.isAuthenticated()) {
-      this.router.navigate([this.authConfig.loginRoute]);
+      this.navigateToLogin();
     } else {
       this.navigateAfterLogin();
     }
@@ -86,5 +83,9 @@ export class AuthenticationService {
         this.router.navigate(['/']);
       }
     }
+  }
+
+  navigateToLogin() {
+    this.router.navigate([this.authConfig.loginRoute]);
   }
 }

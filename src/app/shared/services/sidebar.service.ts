@@ -5,11 +5,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { SidenavItem } from 'app/models/sidenav-item';
 import { AuthenticationService } from 'app/services/auth/auth.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class SidebarService {
 
-  private open: boolean;
+  private _opened: boolean;
   private toggleSource$: Subject<boolean>;
   private itemsSource$: Subject<SidenavItem[]>;
   public toggleMenu$: Observable<boolean>;
@@ -17,39 +18,59 @@ export class SidebarService {
 
 
   constructor(
-    // auth: AuthenticationService
+    private authSvc: AuthenticationService,
   ) {
-    this.open = true;
-    this.toggleSource$ = new Subject<boolean>();
+    this._opened = false;
+    this.toggleSource$ = new BehaviorSubject<boolean>(this._opened);
     this.toggleMenu$ = this.toggleSource$.asObservable();
-    this.itemsSource$ = new Subject<SidenavItem[]>();
 
-    // auth.isAuthenticated$.subscribe(isAuthenticated => this.onAuthChange(isAuthenticated)); // yy todo
+    this.itemsSource$ = new BehaviorSubject<SidenavItem[]>(this.getItems());
+    this.items$ = this.itemsSource$.asObservable();
 
-    this.items$ = of([
+    this.authSvc.isAuthenticated$
+      .subscribe(isAuthenticated => this.onAuthChange(isAuthenticated));
+  }
+
+  onAuthChange(isAuthenticated: boolean) {
+    this.close();
+    if (isAuthenticated) {
+      this.itemsSource$.next(this.getItems());
+    } else {
+      this.itemsSource$.next(this.getItemsNotAuth());
+    }
+  }
+
+  toggle() {
+    this._opened = !this._opened;
+    this.toggleSource$.next(this._opened);
+  }
+
+  close() {
+    this._opened = false;
+    this.toggleSource$.next(this._opened);
+  }
+
+  open() {
+    this._opened = true;
+    this.toggleSource$.next(this._opened);
+  }
+
+
+  getItems(): SidenavItem[] {
+    return [
       new SidenavItem({routerLink: '', caption: 'STRONA GŁÓWNA'}),
       new SidenavItem({routerLink: '/', caption: 'STRONA GŁÓWNA/'}),
       new SidenavItem({routerLink: '/users/all', caption: 'ZAMÓWIENIA'}),
       new SidenavItem({routerLink: '/users/touch', caption: 'SWIPE DEMO'}),
       new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
       new SidenavItem({routerLink: '/users/messages', caption: 'wiadomości ( 0 )'}),
+      new SidenavItem({routerLink: '/logout', caption: 'Logout', icon: 'account_circle'}),
+    ];
+  }
+
+  getItemsNotAuth(): SidenavItem[] {
+    return [
       new SidenavItem({routerLink: '/login', caption: 'Login', icon: 'account_circle'}),
-    ]);
-  }
-
-  onAuthChange(isAuthenticated: boolean) {
-    if (isAuthenticated) {
-      //
-    }
-  }
-
-  toggle() {
-    this.open = !this.open;
-    this.toggleSource$.next(this.open);
-  }
-
-  close() {
-    this.open = false;
-    this.toggleSource$.next(this.open);
+    ];
   }
 }

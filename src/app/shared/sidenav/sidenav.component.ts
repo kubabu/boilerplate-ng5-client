@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SidebarService } from '../../shared/services/sidebar.service';
+import { SidebarService } from 'app/shared/services/sidebar.service';
 import { MatSidenav } from '@angular/material';
 
 @Component({
@@ -11,15 +11,27 @@ import { MatSidenav } from '@angular/material';
 export class SidenavComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
-  constructor(public sidebar: SidebarService) { }
+  constructor(public sidebarSvc: SidebarService) { }
 
   ngOnInit(): void {
-    this.sidebar.toggleMenu$.subscribe(() => {
-      this.sidenav.toggle()
+    this.sidebarSvc.toggleMenu$.subscribe(open => {
+      if (open) {
+        this.open();
+      } else {
+        this.close();
+      }
     });
   }
 
+  open() {
+    this.sidenav.open();
+  }
+
+  close() {
+    this.sidenav.close();
+  }
+
   toggle() {
-    this.sidebar.toggle();
+    this.sidebarSvc.toggle();
   }
 }
