@@ -77,8 +77,10 @@ export class AuthenticationService {
   private isAuthenticated(): boolean {
     // check if token is still valid
     const token = this.authStore.getToken();
+    const isAuthenticated = token != null && token.isValid();
+    this.isAuthenticatedSource$.next(isAuthenticated);
 
-    return token != null && token.isValid();
+    return isAuthenticated;
   }
 
   // todo: move to separate Auth navigation service
