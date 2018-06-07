@@ -4,4 +4,5 @@ import { Injectable } from '@angular/core';
 export class AuthenticationConfiguration {
   public loginRoute = '/login';
   public token = 'currentToken';
+  public tokenKey = 'id_token';
 };
