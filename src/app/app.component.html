@@ -3,13 +3,13 @@
   <app-sidenav></app-sidenav>
 
   <mat-toolbar color="primary">
-    <button mat-button class="app-menu-button" (click)="toggleSidenav()" >
+    <button mat-button class="app-menu-button" (click)="sidebar.open()" >
       <i class="material-icons">menu</i>
     </button>
     <span class="title">{{ title | uppercase }}</span>
   </mat-toolbar>
 
-  <div class="app-content">
+  <div class="app-content" (click)="sidebar.close()">
     <router-outlet></router-outlet>
   </div>
 </mat-sidenav-container>

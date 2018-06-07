@@ -37,9 +37,20 @@ export class AuthConnectorService {
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: better job of transforming error for user consumption
-      this.erorrSubject$.next(error.error);
+      let msg: string;
+      if (typeof(error.error) === 'string') {
+        // 404 or other response from server
+        msg = error.error
+      } else {
+        if (error.status === 0) {
+          // server is down
+          msg = 'Serwer danych niedostępny. Powiadom administratora.'
+        } else {
+          msg = error.message;
+        }
+      }
+      this.erorrSubject$.next(msg);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
