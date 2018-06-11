@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 // API is unavailable
             }
             // do error handling here
-            console.log(err.message);
+            // console.log(err.message);
         }
     });
   }
