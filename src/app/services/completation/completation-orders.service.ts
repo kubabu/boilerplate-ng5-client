@@ -22,7 +22,9 @@ export class CompletationOrdersService implements OnInit {
   constructor(
     private apiConfig: ApiConfiguration,
     private ordersDbRepository: CompletationOrdersDbService,
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     const hubUrl = this.apiConfig.ApiUrl + this.apiConfig.CompletationHubPath;
 
     this._connectionEstablished$ = new BehaviorSubject<boolean>(false);
@@ -35,9 +37,6 @@ export class CompletationOrdersService implements OnInit {
       .build();
     this.registerOnServerEvents(this._hubConnection);
     this.startConnection(this._hubConnection, this.apiConfig.HubReconnectTimeoutMs);
-  }
-
-  ngOnInit(): void {
   }
 
   startConnection(hubConnection: HubConnection, reconnectTimeoutMs: number) {

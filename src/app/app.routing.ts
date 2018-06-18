@@ -7,6 +7,7 @@ import { NotFoundComponent } from 'app/controls/not-found/not-found.component';
 import { DashboardComponent } from 'app/controls/users/dashboard/dashboard.component';
 import { HammerDemoComponent } from 'app/controls/hammer-demo/hammer-demo.component';
 import { MessagesComponent } from 'app/controls/messages/messages.component';
+import { OrdersToCompleteComponent } from 'app/controls/completation/orders-to-complete/orders-to-complete.component';
 
 const ROOT_ROUTES: Routes = [
   {
@@ -16,6 +17,10 @@ const ROOT_ROUTES: Routes = [
   {
     path: 'messages',
     component: MessagesComponent,
+  },
+  {
+    path: 'completation',
+    component: OrdersToCompleteComponent,
   },
   {
     path: 'login',

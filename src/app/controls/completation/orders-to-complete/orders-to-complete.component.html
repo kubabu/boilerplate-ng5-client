@@ -1,3 +1,21 @@
-<p>
-  orders-to-complete works!
-</p>
+<div *ngIf="(ordersService.Orders$ | async)?.length === 0; then thenBlock else elseBlock"></div>
+
+<ng-template #thenBlock>
+  <div class="app-content">
+    <mat-card *ngFor="let order of ordersService.Orders$ | async">
+      <mat-card-content>
+        <div> {{ order.value }} </div>
+      </mat-card-content>
+    </mat-card>    
+</div>
+</ng-template>
+
+<ng-template #elseBlock>
+  <div class="app-content">
+    <mat-card>
+      <mat-card-content>
+        <h2>Brak zamówień do kompletacji</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>

@@ -18,6 +18,7 @@ export class MessageService {
     this.messagesSubject$ = new BehaviorSubject<string[]>(this.messages);
     this.messages$ = this.messagesSubject$.asObservable();
     this.messageCountSubject$ = new BehaviorSubject<number>(this.messages.length);
+    this.messages$.subscribe(msgs => this.messageCountSubject$.next(msgs.length));
     this.count$ = this.messageCountSubject$.asObservable();
   }
 
@@ -32,7 +33,6 @@ export class MessageService {
   }
 
   private updateObservables() {
-    this.messageCountSubject$.next(this.messages.length);
     this.messagesSubject$.next(this.messages);
   }
 }
