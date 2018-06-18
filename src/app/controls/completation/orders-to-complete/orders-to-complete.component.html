@@ -1,14 +1,15 @@
-<div *ngIf="(ordersService.Orders$ | async)?.length > 0; then thenBlock else elseBlock"></div>
+<!-- <div *ngIf="(ordersService.Orders$ | async)?.length > 0; then thenBlock else elseBlock"></div> -->
 
-<ng-template #thenBlock>
+<!-- <ng-template #thenBlock> -->
   <div class="app-content">
     <mat-card *ngFor="let order of ordersService.Orders$ | async">
+      <h2> Zamówienie #{{ order.id }} </h2>
       <mat-card-content>
         <div> {{ order.value }} </div>
       </mat-card-content>
     </mat-card>    
 </div>
-</ng-template>
+<!-- </ng-template>
 
 <ng-template #elseBlock>
   <div class="app-content">
@@ -18,4 +19,4 @@
       </mat-card-content>
     </mat-card>
   </div>
-</ng-template>
+</ng-template> -->

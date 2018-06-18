@@ -12,7 +12,7 @@ export class ApiConfiguration {
     };
 
     public getAuthPath(): string { return `${this.ApiUrl}/api/auth` }
-    public getCompletationHubPath(): string { return `${this.ApiUrl}/Hubs/Values` }
+    public getCompletationHubPath(): string { return `${this.ApiUrl}/Hubs/CompletationOrders` }
     public getCompletationOrdersPath(): string { return `${this.ApiUrl}/api/completationOrders` }
     public getUsersPath(): string { return `${this.ApiUrl}/api/users` }
 };

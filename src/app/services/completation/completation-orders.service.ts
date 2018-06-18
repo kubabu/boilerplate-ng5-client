@@ -32,10 +32,10 @@ export class CompletationOrdersService {
       .withUrl(this.apiConfig.getCompletationHubPath())
       .build();
     this.registerOnServerEvents(this._hubConnection);
-    this.startConnection(this._hubConnection, this.apiConfig.HubReconnectTimeoutMs);
+    this.startConnection(this._hubConnection);
   }
 
-  startConnection(hubConnection: HubConnection, reconnectTimeoutMs: number) {
+  startConnection(hubConnection: HubConnection) {
     hubConnection.start()
       .then(() => {
         this._connectionEstablished$.next(true);
@@ -43,8 +43,12 @@ export class CompletationOrdersService {
       })
       .catch(err => {
         console.log('Error while connecting to hub :', err);
-        setTimeout(this.startConnection(hubConnection, reconnectTimeoutMs), reconnectTimeoutMs);
+        this.setupTryReconnect();
       });
+  }
+
+  private setupTryReconnect() {
+    setTimeout(this.startConnection(this._hubConnection), this.apiConfig.HubReconnectTimeoutMs);
   }
 
   registerOnServerEvents(hubConnection: HubConnection) {
@@ -56,12 +60,13 @@ export class CompletationOrdersService {
       this.onUpdate(data);
     });
 
-    hubConnection.on('Deleted', (data: CompletationOrder) => {
+    hubConnection.on('Delete', (data: CompletationOrder) => {
       this.onDelete(data);
     });
 
     hubConnection.onclose(err => {
       console.log(err);
+      this.setupTryReconnect();
     })
   }
 
@@ -86,25 +91,34 @@ export class CompletationOrdersService {
   }
 
   onUpdate(order: CompletationOrder): any {
-    for (let i = 0; i < this._ordersToComplete.length; i++) {
-      if (this._ordersToComplete[i].id && this._ordersToComplete[i].id === order.id) {
-          this._ordersToComplete.splice(i, 1);
-          this._ordersToComplete.push(order);
-          break;
-      }
+    const index = this.findIndex(order);
+    if (index !== -1) {
+      this._ordersToComplete.splice(index, 1);
+      this._ordersToComplete.push(order);
+      this._ordersToComplete$.next(this._ordersToComplete);
+    } else {
+      console.log('Trying to update non existing order: ', order);
     }
-    this._ordersToComplete$.next(this._ordersToComplete);
   }
 
   onDelete(order: CompletationOrder) {
-    const index: number = this._ordersToComplete.indexOf(order);
+    const index: number = this.findIndex(order);
 
     if (index !== -1) {
       this._ordersToComplete.splice(index, 1)
+      this._ordersToComplete$.next(this._ordersToComplete);
     } else {
       console.log('Trying to remove non existing order: ', order);
     }
-    this._ordersToComplete$.next(this._ordersToComplete);
   }
 
+  private findIndex(order: CompletationOrder): number {
+    for (let i = 0; i < this._ordersToComplete.length; i++) {
+      const currentItem = this._ordersToComplete[i];
+      if (currentItem && currentItem.id ===  order.id) {
+          return i;
+      }
+    }
+    return -1;
+  }
 }
