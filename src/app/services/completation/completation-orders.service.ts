@@ -10,7 +10,7 @@ import { CompletationOrdersDbService } from 'app/services/completation/completat
 
 
 @Injectable()
-export class CompletationOrdersService implements OnInit {
+export class CompletationOrdersService {
   private _hubConnection: HubConnection;
   private _connectionEstablished$: Subject<boolean>;
   private _ordersToComplete: CompletationOrder[];
@@ -22,9 +22,7 @@ export class CompletationOrdersService implements OnInit {
   constructor(
     private apiConfig: ApiConfiguration,
     private ordersDbRepository: CompletationOrdersDbService,
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     const hubUrl = this.apiConfig.ApiUrl + this.apiConfig.CompletationHubPath;
 
     this._connectionEstablished$ = new BehaviorSubject<boolean>(false);
