@@ -12,6 +12,8 @@ import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { AuthenticationService } from 'app/services/auth/auth.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 import { AuthInterceptor } from 'app/services/auth/auth-interceptor.service';
+import { CompletationOrdersDbService } from 'app/services/completation/completation-orders-db.service';
+import { CompletationOrdersService } from 'app/services/completation/completation-orders.service';
 
 @NgModule({
   imports: [
@@ -25,6 +27,8 @@ import { AuthInterceptor } from 'app/services/auth/auth-interceptor.service';
     AuthenticationService,
     BarcodeValidatorService,
     BarcodeDecoderService,
+    CompletationOrdersService,
+    CompletationOrdersDbService,
     UserService,
     MessageService,
     SidebarService,

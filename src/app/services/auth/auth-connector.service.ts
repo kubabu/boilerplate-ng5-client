@@ -6,7 +6,6 @@ import { catchError, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { ApiConfiguration } from 'app/config/api-config';
 import { TokenRequest } from 'app/models/token-request';
-import { TokenResponse } from 'app/models/token-response';
 
 @Injectable()
 export class AuthConnectorService {

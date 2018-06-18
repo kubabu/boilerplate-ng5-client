@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
-import { retry } from 'rxjs/operators/retry';
-import { concat } from 'rxjs/observable/concat';
+import { catchError, tap } from 'rxjs/operators';
 
 import { ApiConfiguration } from 'app/config/api-config';
 import { User } from 'app/models/user';
@@ -20,9 +18,8 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
-    private apiConfig: ApiConfiguration,
-  ) {
-    this.usersUrl = apiConfig.ApiUrl + '/users';
+    private apiConfig: ApiConfiguration) {
+    this.usersUrl = apiConfig.ApiUrl + apiConfig.UsersPath;
    }
 
   private log(message: string) {
