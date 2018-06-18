@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessagesComponent } from './messages.component';
 import { MessageService } from 'app/services/message.service';
-import { AppMaterialModule } from 'app/app.material.module';
+import { CoreModule } from 'app/shared/core.module';
 
 
 describe('MessagesComponent', () => {
@@ -13,7 +13,7 @@ describe('MessagesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ MessagesComponent ],
       imports: [
-        AppMaterialModule,
+        CoreModule,
       ],
       providers: [
         MessageService, // has no ext dependencies and simple enough to not be mocked
