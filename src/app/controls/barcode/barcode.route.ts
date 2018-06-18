@@ -1,9 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { MediaStreamComponent } from './media-stream/media-stream.component';
-import { InputFieldComponent } from './input-field/input-field.component';
 import { BarcodeComponent } from './barcode.component';
-import { OpenMediaStreamComponent } from './open-media-stream/open-media-stream.component';
 
 export const BARCODE_ROUTE: Routes = [
   {

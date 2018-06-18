@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from 'app/shared/shared.module';
 import { BarcodeRouteModule } from './barcode.route';
 import { BarcodeComponent } from './barcode.component';
 import { InputFieldComponent } from './input-field/input-field.component';

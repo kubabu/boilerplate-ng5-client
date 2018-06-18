@@ -7,9 +7,9 @@ import { AppComponent } from 'app/app.component';
 import { SidenavComponent } from 'app/shared/sidenav/sidenav.component';
 import { FabMenuComponent } from 'app/shared/fab-menu/fab-menu.component';
 import { CoreModule } from 'app/shared/core.module';
-import { BarcodeModule } from 'app/barcode/barcode.module';
+import { PagesModule } from 'app/controls/pages.module';
+import { BarcodeModule } from 'app/controls/barcode/barcode.module';
 import { UsersModule } from 'app/users/users.module';
-import { PagesModule } from 'app/pages/pages.module';
 
 @NgModule({
   declarations: [

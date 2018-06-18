@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from 'app/app.component';
+import { LoginComponent } from 'app/controls/login/login.component';
+import { LogoutComponent } from 'app/controls/logout/logout.component';
+import { NotFoundComponent } from 'app/controls/not-found/not-found.component';
 import { DashboardComponent } from 'app/users/dashboard/dashboard.component';
-import { LoginComponent } from 'app/pages/login/login.component';
-import { LogoutComponent } from 'app/pages/logout/logout.component';
-import { NotFoundComponent } from 'app/pages/not-found/not-found.component';
 
 const ROOT_ROUTES: Routes = [
   {
@@ -27,7 +26,7 @@ const ROOT_ROUTES: Routes = [
   },
   {
     path: 'barcode',
-    loadChildren: './barcode/barcode.module#BarcodeModule',
+    loadChildren: './controls/barcode/barcode.module#BarcodeModule',
   },
   {
     path: '404',
