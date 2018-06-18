@@ -38,7 +38,6 @@ export class CompletationOrdersService implements OnInit {
   }
 
   ngOnInit(): void {
-    // hmm
   }
 
   startConnection(hubConnection: HubConnection, reconnectTimeoutMs: number) {

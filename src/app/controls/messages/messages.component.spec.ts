@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessagesComponent } from './messages.component';
-import { MessageService } from './../../services/message.service';
-import { AppMaterialModule } from './../../app.material.module';
+import { MessageService } from 'app/services/message.service';
+import { AppMaterialModule } from 'app/app.material.module';
 
 
 describe('MessagesComponent', () => {
@@ -13,11 +13,11 @@ describe('MessagesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ MessagesComponent ],
       imports: [
-        AppMaterialModule
-      ]
+        AppMaterialModule,
+      ],
       providers: [
-        MessageService // has no ext dependencies and simple enough to not be mocked
-      ]
+        MessageService, // has no ext dependencies and simple enough to not be mocked
+      ],
     })
     .compileComponents();
   }));

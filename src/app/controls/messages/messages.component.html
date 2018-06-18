@@ -1,8 +1,8 @@
-<div *ngIf="messages.length; then thenBlock else elseBlock"></div>
-  
+<div *ngIf="messageService.count$ | async ; then thenBlock else elseBlock"></div>
+
 <ng-template #thenBlock>
   <div class="app-content">
-    <mat-card *ngFor="let message of messages">
+    <mat-card *ngFor="let message of messageService.messages$ | async">
       <mat-card-content>
         <div> {{message}} </div>
       </mat-card-content>

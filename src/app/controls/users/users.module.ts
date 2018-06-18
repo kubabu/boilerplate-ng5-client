@@ -7,7 +7,6 @@ import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserSearchComponent } from './user-search/user-search.component';
-import { MessagesComponent } from './messages/messages.component';
 import { UsersRootComponent } from './users-root/users-root.component';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { UsersRootComponent } from './users-root/users-root.component';
     UsersComponent,
     UserDetailComponent,
     UserSearchComponent,
-    MessagesComponent,
     UsersRootComponent,
   ],
 })
