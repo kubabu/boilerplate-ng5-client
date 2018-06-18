@@ -6,6 +6,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { OrdersToCompleteComponent } from './completation/orders-to-complete/orders-to-complete.component';
 import { MessagesComponent } from './messages/messages.component';
+import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { MessagesComponent } from './messages/messages.component';
     CoreModule,
   ],
   declarations: [
+    HammerDemoComponent,
     LoginComponent,
     LogoutComponent,
     MessagesComponent,

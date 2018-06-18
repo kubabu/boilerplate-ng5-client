@@ -59,11 +59,10 @@ export class SidebarService {
   getItems(): SidenavItem[] {
     return [
       new SidenavItem({routerLink: '', caption: 'STRONA GŁÓWNA'}),
-      new SidenavItem({routerLink: '/', caption: 'STRONA GŁÓWNA/'}),
-      new SidenavItem({routerLink: '/users/all', caption: 'ZAMÓWIENIA'}),
-      new SidenavItem({routerLink: '/users/touch', caption: 'SWIPE DEMO'}),
+      new SidenavItem({routerLink: '/users/all', caption: 'Użytkownicy'}),
+      new SidenavItem({routerLink: '/touch', caption: 'SWIPE DEMO'}),
       new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
-      new SidenavItem({routerLink: '/users/messages', caption: 'wiadomości ( 0 )'}),
+      new SidenavItem({routerLink: '/messages', caption: 'wiadomości ( 0 )'}),
       new SidenavItem({routerLink: '/logout', caption: 'Logout', icon: 'account_circle'}),
     ];
   }

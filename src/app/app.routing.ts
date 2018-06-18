@@ -5,12 +5,17 @@ import { LoginComponent } from 'app/controls/login/login.component';
 import { LogoutComponent } from 'app/controls/logout/logout.component';
 import { NotFoundComponent } from 'app/controls/not-found/not-found.component';
 import { DashboardComponent } from 'app/controls/users/dashboard/dashboard.component';
+import { HammerDemoComponent } from 'app/controls/hammer-demo/hammer-demo.component';
+import { MessagesComponent } from 'app/controls/messages/messages.component';
 
 const ROOT_ROUTES: Routes = [
   {
-    path: '',
-    component: DashboardComponent,
-    pathMatch: 'full',
+    path: 'touch',
+    component: HammerDemoComponent,
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent,
   },
   {
     path: 'login',
@@ -29,6 +34,11 @@ const ROOT_ROUTES: Routes = [
     loadChildren: './controls/barcode/barcode.module#BarcodeModule',
   },
   {
+    path: '',
+    component: DashboardComponent,
+    pathMatch: 'full',
+  },
+  {
     path: '404',
     component: NotFoundComponent,
   },
@@ -37,7 +47,6 @@ const ROOT_ROUTES: Routes = [
     redirectTo: '404',
     pathMatch: 'full',
   },
-
 ];
 
 @NgModule({
