@@ -1,11 +1,10 @@
-// import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
 import { UsersComponent } from './users/users.component';
-import { UsersRootComponent } from 'app/users/users-root/users-root.component';
+import { UsersRootComponent } from './users-root/users-root.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 

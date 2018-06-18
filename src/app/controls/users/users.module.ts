@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { UsersRouteModule } from './users.route';
-import { SharedModule } from '../shared/shared.module';
 
+import { SharedModule } from 'app/shared/shared.module';
+import { UsersRouteModule } from './users.route';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
 import { UsersComponent } from './users/users.component';

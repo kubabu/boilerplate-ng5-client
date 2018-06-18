@@ -8,10 +8,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { AppMaterialModule } from './../../app.material.module';
 import { DashboardComponent } from './dashboard.component';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { User } from 'app/models/user';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   template: '',
@@ -47,7 +46,7 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
       imports: [
-        AppMaterialModule,
+        // AppMaterialModule,
         MockModule,
         RouterTestingModule.withRoutes([
             {

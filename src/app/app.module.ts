@@ -9,7 +9,7 @@ import { FabMenuComponent } from 'app/shared/fab-menu/fab-menu.component';
 import { CoreModule } from 'app/shared/core.module';
 import { PagesModule } from 'app/controls/pages.module';
 import { BarcodeModule } from 'app/controls/barcode/barcode.module';
-import { UsersModule } from 'app/users/users.module';
+import { UsersModule } from 'app/controls/users/users.module';
 
 @NgModule({
   declarations: [

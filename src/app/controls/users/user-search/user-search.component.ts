@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
-
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { of } from 'rxjs/observable/of';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
-import {
-   debounceTime, distinctUntilChanged, switchMap,
- } from 'rxjs/operators';
-
-import { User } from './../../models/user';
-import { UserService } from './../../services/user.service';
+import { User } from 'app/models/user';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-user-search',

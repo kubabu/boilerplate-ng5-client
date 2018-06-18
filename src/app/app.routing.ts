@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from 'app/controls/login/login.component';
 import { LogoutComponent } from 'app/controls/logout/logout.component';
 import { NotFoundComponent } from 'app/controls/not-found/not-found.component';
-import { DashboardComponent } from 'app/users/dashboard/dashboard.component';
+import { DashboardComponent } from 'app/controls/users/dashboard/dashboard.component';
 
 const ROOT_ROUTES: Routes = [
   {
@@ -22,7 +22,7 @@ const ROOT_ROUTES: Routes = [
   },
   {
     path: 'users',
-    loadChildren: './users/users.module#UsersModule',
+    loadChildren: './controls/users/users.module#UsersModule',
   },
   {
     path: 'barcode',
