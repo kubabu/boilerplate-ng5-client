@@ -10,7 +10,6 @@ import { TokenRequest } from 'app/models/token-request';
 @Injectable()
 export class AuthConnectorService {
 
-  private authUrl: string;
   private erorrSubject$: Subject<string>;
   errorMessage$: Observable<string>;
 
@@ -20,7 +19,6 @@ export class AuthConnectorService {
     private http: HttpClient,
 
   ) {
-    this.authUrl = apiConfig.ApiUrl + '/auth';
     this.erorrSubject$ = new Subject<string>();
     this.errorMessage$ = this.erorrSubject$.asObservable();
   }
@@ -28,7 +26,7 @@ export class AuthConnectorService {
 
   loginRequest(tokenRequest: TokenRequest): Observable<any> {
 
-    return this.http.post(this.authUrl, tokenRequest, this.apiConfig.httpOptions).pipe(
+    return this.http.post(this.apiConfig.getAuthPath(), tokenRequest, this.apiConfig.httpOptions).pipe(
       tap(_ => this.erorrSubject$.next('')),
       catchError(this.handleError<any>('loginRequest')),
     );

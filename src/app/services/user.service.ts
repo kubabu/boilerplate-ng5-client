@@ -19,7 +19,7 @@ export class UserService {
     private http: HttpClient,
     private messageService: MessageService,
     private apiConfig: ApiConfiguration) {
-    this.usersUrl = apiConfig.ApiUrl + apiConfig.UsersPath;
+    this.usersUrl = apiConfig.getUsersPath();
    }
 
   private log(message: string) {

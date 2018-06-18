@@ -15,7 +15,7 @@ export class CompletationOrdersDbService {
   constructor(
     private http: HttpClient,
     private apiConfig: ApiConfiguration) {
-    this.url = `${this.apiConfig.ApiUrl}/api/values`;
+    this.url = apiConfig.getCompletationOrdersPath();
   }
 
   /**

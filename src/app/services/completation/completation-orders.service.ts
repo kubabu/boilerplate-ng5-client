@@ -23,15 +23,13 @@ export class CompletationOrdersService {
     private apiConfig: ApiConfiguration,
     private ordersDbRepository: CompletationOrdersDbService,
   ) {
-    const hubUrl = this.apiConfig.ApiUrl + this.apiConfig.CompletationHubPath;
-
     this._connectionEstablished$ = new BehaviorSubject<boolean>(false);
     this._ordersToComplete$ = new Subject<CompletationOrder[]>();
     this.IsConnected$ = this._connectionEstablished$.asObservable();
     this.Orders$ = this._ordersToComplete$.asObservable();
 
     this._hubConnection = new HubConnectionBuilder()
-      .withUrl(hubUrl)
+      .withUrl(this.apiConfig.getCompletationHubPath())
       .build();
     this.registerOnServerEvents(this._hubConnection);
     this.startConnection(this._hubConnection, this.apiConfig.HubReconnectTimeoutMs);

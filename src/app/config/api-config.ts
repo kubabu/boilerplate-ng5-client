@@ -4,13 +4,16 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ApiConfiguration {
-    public ApiUrl = environment.apiUrl;
+    private ApiUrl = environment.apiUrl;
     public HubReconnectTimeoutMs = 5000;
-    public CompletationHubPath = '/Hubs/Values';
-    public UsersPath = '/users';
 
     public httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
+
+    public getAuthPath(): string { return `${this.ApiUrl}/api/auth` }
+    public getCompletationHubPath(): string { return `${this.ApiUrl}/Hubs/Values` }
+    public getCompletationOrdersPath(): string { return `${this.ApiUrl}/api/completationOrders` }
+    public getUsersPath(): string { return `${this.ApiUrl}/api/users` }
 };
 

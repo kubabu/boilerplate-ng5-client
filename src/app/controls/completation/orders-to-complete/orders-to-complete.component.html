@@ -1,4 +1,4 @@
-<div *ngIf="(ordersService.Orders$ | async)?.length === 0; then thenBlock else elseBlock"></div>
+<div *ngIf="(ordersService.Orders$ | async)?.length > 0; then thenBlock else elseBlock"></div>
 
 <ng-template #thenBlock>
   <div class="app-content">
