@@ -15,6 +15,7 @@ export class CompletationOrdersService {
   private _connectionEstablished$: Subject<boolean>;
   private _ordersToComplete: CompletationOrder[];
   private _ordersToComplete$: Subject<CompletationOrder[]>;
+  private _reconnects = 0;
   public IsConnected$: Observable<boolean>;
   public Orders$: Observable<CompletationOrder[]>;
 
@@ -48,7 +49,9 @@ export class CompletationOrdersService {
   }
 
   private setupTryReconnect() {
-    setTimeout(this.startConnection(this._hubConnection), this.apiConfig.HubReconnectTimeoutMs);
+    if (++this._reconnects < 3) {
+      setTimeout(this.startConnection(this._hubConnection), this.apiConfig.HubReconnectTimeoutMs);
+    }
   }
 
   registerOnServerEvents(hubConnection: HubConnection) {

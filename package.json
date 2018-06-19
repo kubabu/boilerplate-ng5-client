@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot --ssl true --ssl-key ssl/localhost.key --ssl-cert ssl/localhost.crt  --env=dev",
+    "start": "ng serve --aot --ssl true --ssl-key ssl/localhost.key --ssl-cert ssl/localhost.crt  --env=prod",
     "build": "ng build --aot --prod  --env=prod",
     "deploy": "ng build --aot --prod --base-href '/html/' && angular-cli-ghpages",
     "lint": "ng lint",

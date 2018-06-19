@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://192.168.1.81:5000',
-  apiUrl: 'https://localhost:5000',
+  apiUrl: 'https://192.168.1.81:5000',
+  // apiUrl: 'https://localhost:5000',
 };
