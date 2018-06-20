@@ -24,7 +24,7 @@ export class SidebarService {
     this.toggleSource$ = new BehaviorSubject<boolean>(this._opened);
     this.toggleMenu$ = this.toggleSource$.asObservable();
 
-    this.itemsSource$ = new BehaviorSubject<SidenavItem[]>(this.getItems());
+    this.itemsSource$ = new BehaviorSubject<SidenavItem[]>(this.getItemsNotAuth());
     this.items$ = this.itemsSource$.asObservable();
 
     this.authSvc.isAuthenticated$
@@ -34,7 +34,7 @@ export class SidebarService {
   onAuthChange(isAuthenticated: boolean) {
     this.close();
     if (isAuthenticated) {
-      this.itemsSource$.next(this.getItems());
+      this.itemsSource$.next(this.getItems('dev')); // gTODO pass here user from server response
     } else {
       this.itemsSource$.next(this.getItemsNotAuth());
     }
@@ -56,16 +56,27 @@ export class SidebarService {
   }
 
 
-  getItems(): SidenavItem[] {
-    return [
-      new SidenavItem({routerLink: '', caption: 'STRONA GŁÓWNA'}),
-      new SidenavItem({routerLink: '/completation', caption: 'Kompletacja'}),
-      new SidenavItem({routerLink: '/touch', caption: 'SWIPE DEMO'}),
-      new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
-      new SidenavItem({routerLink: '/users/all', caption: 'Użytkownicy'}),
-      new SidenavItem({routerLink: '/messages', caption: 'wiadomości ( 0 )'}),
-      new SidenavItem({routerLink: '/logout', caption: 'Logout', icon: 'account_circle'}),
+  getItems(role: string): SidenavItem[] {
+    let items = [
+      new SidenavItem({routerLink: '', caption: 'Zalogowano: ' + role}),
     ];
+    if (['user', 'admin', 'dev'].indexOf(role) !== -1) {
+      items.push(new SidenavItem({routerLink: '/completation', caption: 'Kompletacja'}));
+    }
+    if (['admin', 'dev'].indexOf(role) !== -1) {
+      items.push(new SidenavItem({routerLink: '/users/all', caption: 'Użytkownicy'}));
+    }
+    if (role === 'dev') {
+      const develSidenavItems = [
+        new SidenavItem({routerLink: '/touch', caption: 'SWIPE DEMO'}),
+        new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
+        new SidenavItem({routerLink: '/users/all', caption: 'Użytkownicy'}),
+        new SidenavItem({routerLink: '/messages', caption: 'wiadomości ( 0 )'}),
+      ]
+      items = items.concat(develSidenavItems);
+    }
+    items.push(new SidenavItem({routerLink: '/logout', caption: 'Wyloguj', icon: 'account_circle'}));
+    return items;
   }
 
   getItemsNotAuth(): SidenavItem[] {

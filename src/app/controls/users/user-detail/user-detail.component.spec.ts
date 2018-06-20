@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserDetailComponent } from './user-detail.component';
 import { MockUserService } from './../dashboard/dashboard.component.spec';
-import { UserService } from './../../services/user.service';
+import { UserService } from 'app/services/user.service';
 import { Location } from '@angular/common';
 
 describe('UserDetailComponent', () => {

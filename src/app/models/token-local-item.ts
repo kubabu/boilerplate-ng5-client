@@ -1,4 +1,4 @@
-import { User } from './user';
+import { UserViewModel } from './user-view-model';
 import { TokenResponse } from './token-response';
 
 export class TokenLocalStorageItem {
@@ -6,13 +6,13 @@ export class TokenLocalStorageItem {
 
     public token: string;
     public validTo: Date;
-    public user: User;
+    public user: UserViewModel;
 
 
     constructor(response: TokenResponse) {
 
-        this.user = response.user;
         this.token = response.token;
+        this.user = response.user;
         this.validTo = new Date(Date.parse(response.validTo));
     }
 

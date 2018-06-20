@@ -7,7 +7,7 @@ import { BarcodeValidatorService } from 'app/controls/barcode/services/barcode-v
 import { AuthenticationService } from 'app/services/auth/auth.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
-import { AuthInterceptor } from 'app/services/auth/auth-interceptor.service';
+import { AuthInterceptor } from 'app/services/interceptors/auth-interceptor.service';
 import { CompletationOrdersDbService } from 'app/services/completation/completation-orders-db.service';
 import { CompletationOrdersService } from 'app/services/completation/completation-orders.service';
 import { UserService } from 'app/services/user.service';

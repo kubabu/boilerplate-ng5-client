@@ -13,6 +13,15 @@ import { UserService } from 'app/services/user.service';
 })
 export class UserDetailComponent implements OnInit {
   @Input() user: User;
+  user_password_repeat: string;
+
+  allowedRoles = [
+    {value: '', viewValue: 'Żadna'},
+    {value: 'bot', viewValue: 'Bot'},
+    {value: 'user', viewValue: 'Użytkownik'},
+    {value: 'admin', viewValue: 'Administrator'},
+    {value: 'dev', viewValue: 'Programista'},
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +37,11 @@ export class UserDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap
       .get('id');
     this.userService.getUser(id)
-      .subscribe(user => this.user = user);
+      .subscribe(user => {
+        user.password = '';
+        this.user = user;
+        this.user_password_repeat = this.user.password;
+      });
   }
 
   goBack(): void {
@@ -36,6 +49,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   save(): void {
+    // allowedRoles.se
     this.userService.updateUser(this.user)
       .subscribe(() => this.goBack());
   }

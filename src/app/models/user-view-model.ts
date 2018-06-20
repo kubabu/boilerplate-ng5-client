@@ -1,11 +1,11 @@
-export class User {
+export class UserViewModel {
     id: number;
     name: string;
     startupUri: string;
     role: string;
-    password: string;
+    tabs: string[];
 
-    public constructor(init?: Partial<User>) {
+    public constructor(init?: Partial<UserViewModel>) {
       Object.assign(this, init);
   }
 }
