@@ -17,10 +17,10 @@ export class UserDetailComponent implements OnInit {
 
   allowedRoles = [
     {value: '', viewValue: 'Żadna'},
-    {value: 'bot', viewValue: 'Bot'},
-    {value: 'user', viewValue: 'Użytkownik'},
-    {value: 'admin', viewValue: 'Administrator'},
-    {value: 'dev', viewValue: 'Programista'},
+    {value: 'Bot', viewValue: 'Bot'},
+    {value: 'User', viewValue: 'Użytkownik'},
+    {value: 'Admin', viewValue: 'Administrator'},
+    {value: 'Dev', viewValue: 'Programista'},
   ];
 
   constructor(

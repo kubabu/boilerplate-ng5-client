@@ -2,15 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { timer } from 'rxjs/observable/timer';
-import { Subject } from 'rxjs/Subject';
 
 import { AuthenticationConfiguration } from 'app/config/auth-config';
-import { TokenLocalStorageItem } from 'app/models/token-local-item';
 import { TokenRequest } from 'app/models/token-request';
 import { TokenResponse } from 'app/models/token-response';
-import { User } from 'app/models/user';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
-import { SidebarService } from 'app/shared/services/sidebar.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 

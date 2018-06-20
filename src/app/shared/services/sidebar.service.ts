@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { SidenavItem } from 'app/models/sidenav-item';
 import { AuthenticationService } from 'app/services/auth/auth.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.service';
 
 @Injectable()
 export class SidebarService {
@@ -19,12 +20,13 @@ export class SidebarService {
 
   constructor(
     private authSvc: AuthenticationService,
+    private mappingService: SidebarMappingService,
   ) {
     this._opened = false;
     this.toggleSource$ = new BehaviorSubject<boolean>(this._opened);
     this.toggleMenu$ = this.toggleSource$.asObservable();
 
-    this.itemsSource$ = new BehaviorSubject<SidenavItem[]>(this.getItemsNotAuth());
+    this.itemsSource$ = new BehaviorSubject<SidenavItem[]>(this.mappingService.getSidenavItems(false));
     this.items$ = this.itemsSource$.asObservable();
 
     this.authSvc.isAuthenticated$
@@ -33,11 +35,7 @@ export class SidebarService {
 
   onAuthChange(isAuthenticated: boolean) {
     this.close();
-    if (isAuthenticated) {
-      this.itemsSource$.next(this.getItems('dev')); // gTODO pass here user from server response
-    } else {
-      this.itemsSource$.next(this.getItemsNotAuth());
-    }
+    this.itemsSource$.next(this.mappingService.getSidenavItems(isAuthenticated));
   }
 
   toggle() {
@@ -53,35 +51,5 @@ export class SidebarService {
   open() {
     this._opened = true;
     this.toggleSource$.next(this._opened);
-  }
-
-
-  getItems(role: string): SidenavItem[] {
-    let items = [
-      new SidenavItem({routerLink: '', caption: 'Zalogowano: ' + role}),
-    ];
-    if (['user', 'admin', 'dev'].indexOf(role) !== -1) {
-      items.push(new SidenavItem({routerLink: '/completation', caption: 'Kompletacja'}));
-    }
-    if (['admin', 'dev'].indexOf(role) !== -1) {
-      items.push(new SidenavItem({routerLink: '/users/all', caption: 'Użytkownicy'}));
-    }
-    if (role === 'dev') {
-      const develSidenavItems = [
-        new SidenavItem({routerLink: '/touch', caption: 'SWIPE DEMO'}),
-        new SidenavItem({routerLink: '/barcode', caption: 'CZYTNIK KODÓW'}),
-        new SidenavItem({routerLink: '/users/all', caption: 'Użytkownicy'}),
-        new SidenavItem({routerLink: '/messages', caption: 'wiadomości ( 0 )'}),
-      ]
-      items = items.concat(develSidenavItems);
-    }
-    items.push(new SidenavItem({routerLink: '/logout', caption: 'Wyloguj', icon: 'account_circle'}));
-    return items;
-  }
-
-  getItemsNotAuth(): SidenavItem[] {
-    return [
-      new SidenavItem({routerLink: '/login', caption: 'Login', icon: 'account_circle'}),
-    ];
   }
 }

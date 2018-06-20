@@ -14,6 +14,7 @@ import { UserService } from 'app/services/user.service';
 import { MessageService } from 'app/services/message.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { SidebarService } from 'app/shared/services/sidebar.service';
+import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.service';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { SidebarService } from 'app/shared/services/sidebar.service';
     UserService,
     MessageService,
     SidebarService,
+    SidebarMappingService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
