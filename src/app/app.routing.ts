@@ -10,6 +10,7 @@ import { MessagesComponent } from 'app/controls/messages/messages.component';
 import { OrdersToCompleteComponent } from 'app/controls/completation/orders-to-complete/orders-to-complete.component';
 
 const ROOT_ROUTES: Routes = [
+  // DEVELOPER DEMO COMPONENTS FROM NOW
   {
     path: 'touch',
     component: HammerDemoComponent,
@@ -19,8 +20,19 @@ const ROOT_ROUTES: Routes = [
     component: MessagesComponent,
   },
   {
+    path: 'barcode',
+    loadChildren: './controls/barcode/barcode.module#BarcodeModule',
+  },
+  // DEVELOPER DEMO END
+  {
     path: 'completation',
     component: OrdersToCompleteComponent,
+    // TODO: canLoad if User is User, Admin, Developer
+  },
+  {
+    path: 'users',
+    loadChildren: './controls/users/users.module#UsersModule',
+     // TODO: canLoad if user role is Admin
   },
   {
     path: 'login',
@@ -29,14 +41,6 @@ const ROOT_ROUTES: Routes = [
   {
     path: 'logout',
     component: LogoutComponent,
-  },
-  {
-    path: 'users',
-    loadChildren: './controls/users/users.module#UsersModule',
-  },
-  {
-    path: 'barcode',
-    loadChildren: './controls/barcode/barcode.module#BarcodeModule',
   },
   {
     path: '',

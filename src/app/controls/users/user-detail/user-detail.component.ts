@@ -13,7 +13,10 @@ import { UserService } from 'app/services/user.service';
 })
 export class UserDetailComponent implements OnInit {
   @Input() user: User;
-  user_password_repeat: string;
+  selectedRole: string;
+  passwordRepeat: string;
+  passwordMatch: boolean;
+  passwordHide = true;
 
   allowedRoles = [
     {value: '', viewValue: 'Żadna'},
@@ -40,7 +43,7 @@ export class UserDetailComponent implements OnInit {
       .subscribe(user => {
         user.password = '';
         this.user = user;
-        this.user_password_repeat = this.user.password;
+        this.passwordRepeat = this.user.password;
       });
   }
 
@@ -54,4 +57,7 @@ export class UserDetailComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
+  getPasswordErrorMessage() {
+    return this.passwordRepeat !== this.user.password ? 'Podane hasła różnią się!' : ''
+  }
 }

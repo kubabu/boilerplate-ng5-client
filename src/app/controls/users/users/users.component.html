@@ -1,7 +1,7 @@
 <div class="app-content">
   <mat-card >
     <mat-card-content>
-      <h2> Users </h2>
+      <h2> Użytkownicy </h2>
 
       <mat-list class="app-list">
         <mat-list-item *ngFor="let user of users">
@@ -24,12 +24,12 @@
 
       <div>
         <mat-form-field>
-          <input matInput #userName placeholder="User name" />
+          <input matInput #userName placeholder="Wpisz login..." />
         </mat-form-field>         
       </div>
       <button mat-raised-button color="primary"
        (click)="add(userName.value); userName.value=''">
-        ADD
+        DODAJ NOWEGO
       </button>
 
     </mat-card-content>
