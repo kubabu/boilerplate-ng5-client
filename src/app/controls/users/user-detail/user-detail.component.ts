@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 
 import { User } from 'app/models/user';
 import { UserService } from 'app/services/user.service';
+import { FormControl, Validators } from '@angular/forms';
+import { PasswordErrorStateMatcher } from 'app/services/validators/password-validation.service';
 
 
 @Component({
@@ -12,6 +14,12 @@ import { UserService } from 'app/services/user.service';
   styleUrls: [ './user-detail.component.css' ],
 })
 export class UserDetailComponent implements OnInit {
+  pwdFormControl = new FormControl('', [
+    Validators.email,
+  ]);
+
+  matcher = new PasswordErrorStateMatcher();
+
   @Input() user: User;
   selectedRole: string;
   passwordRepeat: string;
@@ -57,7 +65,8 @@ export class UserDetailComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
-  getPasswordErrorMessage() {
-    return this.passwordRepeat !== this.user.password ? 'Podane hasła różnią się!' : ''
+  isPasswordRepeated(): boolean {
+    return this.passwordRepeat === this.user.password;
   }
+
 }

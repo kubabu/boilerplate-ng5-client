@@ -1,1 +1,11 @@
 /* @import './../../../app.component.css'; */
+
+.user-detail-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.user-detail-container > * {
+    width: 100%;
+}
+  

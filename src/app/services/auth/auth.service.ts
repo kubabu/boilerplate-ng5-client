@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { timer } from 'rxjs/observable/timer';
 
 import { AuthenticationConfiguration } from 'app/config/auth-config';
 import { TokenRequest } from 'app/models/token-request';
+import { TokenLocalStorageItem } from 'app/models/token-local-item';
 import { TokenResponse } from 'app/models/token-response';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -49,10 +50,10 @@ export class AuthenticationService {
       this.navigateAfterLogin();
 
       // setup observable timer to request new token just before this one expires
-      // const responseObject = new TokenLocalStorageItem(response);
+      const responseObject = new TokenLocalStorageItem(response);
       // TODO: test
-      // this.setReloadTimer(responseObject.validTo)
-      //   .subscribe(_ => this.login(this.tokenRequest.Username, this.tokenRequest.Password));
+      this.setReloadTimer(responseObject.validTo)
+        .subscribe(_ => this.login(this.tokenRequest.Username, this.tokenRequest.Password));
     }
   }
 
