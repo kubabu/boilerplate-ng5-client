@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { User } from 'app/models/user';
 import { UserService } from 'app/services/user.service';
-import { FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PasswordErrorStateMatcher, PasswordValidator } from 'app/services/validators/password-validation.service';
 
 
@@ -14,13 +14,15 @@ import { PasswordErrorStateMatcher, PasswordValidator } from 'app/services/valid
   styleUrls: [ './user-detail.component.css' ],
 })
 export class UserDetailComponent implements OnInit {
-  pwdFormControl = new FormControl('', [
-    Validators.email,
-    //  PasswordValidator.MatchPassword,
-  ]);
+
+  password = new FormControl('', Validators.minLength(4));
+  passwordConfirm = new FormControl('', Validators.minLength(4));
+  // form = new FormGroup({
+  //   password: new FormControl('', Validators.minLength(4)),
+  //   passwordConfirm: new FormControl('', Validators.minLength(4)),
+  // }, PasswordValidator.passwordMatchValidator);
 
   matcher = new PasswordErrorStateMatcher();
-  // form: any;
 
   @Input() user: User;
   selectedRole: string;
@@ -42,13 +44,6 @@ export class UserDetailComponent implements OnInit {
     private location: Location,
     private fb: FormBuilder,
   ) {
-
-    // this.form = fb.group({
-    //   password: [''],
-    //   confirmPassword: [''],
-    // }, {
-    //   validator: PasswordValidator.MatchPassword,
-    // })
 
   }
 
@@ -72,13 +67,18 @@ export class UserDetailComponent implements OnInit {
   }
 
   save(): void {
-    // allowedRoles.se
+    // check if passwords are different
     this.userService.updateUser(this.user)
       .subscribe(() => this.goBack());
   }
 
   isPasswordRepeated(): boolean {
-    return this.passwordRepeat === this.user.password;
+    const result = this.passwordRepeat === this.user.password;
+    return result;
   }
+
+  // getPasswordErrors(): any {
+  //   return this.password.errors;
+  // }
 
 }

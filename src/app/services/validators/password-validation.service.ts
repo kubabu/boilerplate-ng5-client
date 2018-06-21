@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgForm, FormGroupDirective, FormControl, AbstractControl } from '@angular/forms';
+import { NgForm, FormGroupDirective, FormControl, AbstractControl, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 @Injectable()
@@ -24,4 +24,10 @@ export class PasswordValidator {
         return null
     }
   }
+
+  static passwordMatchValidator(g: FormGroup) {
+    return g.get('password').value === g.get('passwordConfirm').value
+       ? null : {'mismatch': true};
+  }
+
 }
