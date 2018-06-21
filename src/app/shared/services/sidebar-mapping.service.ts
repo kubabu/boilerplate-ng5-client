@@ -46,15 +46,16 @@ export class SidebarMappingService {
         items.push(element);
       });
     }
-    items.push(new SidenavItem({routerLink: '/logout', caption: 'Wyloguj', icon: 'account_circle'}));
+
+    this.mappingConfig.authorizedSidenavItemsEnd.forEach(element => {
+      items.push(element);
+    });
 
     return items;
   }
 
   getItemsNotAuth(): SidenavItem[] {
-    return [
-      new SidenavItem({routerLink: '/login', caption: 'Login', icon: 'account_circle'}),
-    ];
+    return this.mappingConfig.unauthorizedSidenavItems;
   }
 
 }

@@ -4,8 +4,8 @@ import { Location } from '@angular/common';
 
 import { User } from 'app/models/user';
 import { UserService } from 'app/services/user.service';
-import { FormControl, Validators } from '@angular/forms';
-import { PasswordErrorStateMatcher } from 'app/services/validators/password-validation.service';
+import { FormControl, FormBuilder, Validators } from '@angular/forms';
+import { PasswordErrorStateMatcher, PasswordValidator } from 'app/services/validators/password-validation.service';
 
 
 @Component({
@@ -16,9 +16,11 @@ import { PasswordErrorStateMatcher } from 'app/services/validators/password-vali
 export class UserDetailComponent implements OnInit {
   pwdFormControl = new FormControl('', [
     Validators.email,
+    //  PasswordValidator.MatchPassword,
   ]);
 
   matcher = new PasswordErrorStateMatcher();
+  // form: any;
 
   @Input() user: User;
   selectedRole: string;
@@ -38,7 +40,17 @@ export class UserDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private location: Location,
-  ) { }
+    private fb: FormBuilder,
+  ) {
+
+    // this.form = fb.group({
+    //   password: [''],
+    //   confirmPassword: [''],
+    // }, {
+    //   validator: PasswordValidator.MatchPassword,
+    // })
+
+  }
 
   ngOnInit() {
     this.getUser();
