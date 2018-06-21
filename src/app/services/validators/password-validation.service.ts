@@ -25,9 +25,15 @@ export class PasswordValidator {
     }
   }
 
-  static passwordMatchValidator(g: FormGroup) {
-    return g.get('password').value === g.get('passwordConfirm').value
-       ? null : {'mismatch': true};
+  static passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password').value;
+    const confirmPassword = formGroup.get('passwordConfirm').value;
+    const confirmedPassword = confirmPassword ? confirmPassword : '';
+    if (password === confirmedPassword) {
+      return null;
+    } else {
+      return {'mismatch': true};
+    }
   }
 
 }
