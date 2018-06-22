@@ -1,7 +1,7 @@
 <div class="app-content">
   <mat-card >
     <mat-card-content>
-      <h3>Top users. Cannot see one? </h3> <app-user-search></app-user-search>
+      <h3> Użytkownicy </h3> <app-user-search></app-user-search>
     </mat-card-content>
   </mat-card>
 
@@ -12,7 +12,9 @@
       <mat-card >
         <mat-card-content>
           <h1 class="mdc-card__title mdc-card__title--large">{{user.name}}</h1>
-          <!-- <h2 class="mdc-card__subtitle">Subtitle here</h2> -->
+          <div *ngIf="user.role">
+            <h2 class="mdc-card__subtitle"> Przypisana rola: {{ user.role }} </h2>
+          </div>
         </mat-card-content>
       </mat-card>
 

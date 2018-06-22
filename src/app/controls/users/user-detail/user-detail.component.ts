@@ -54,7 +54,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   save(): void {
-    // check if passwords are different
     this.userService.updateUser(this.user)
       .subscribe(() => this.goBack());
   }

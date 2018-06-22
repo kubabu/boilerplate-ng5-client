@@ -53,9 +53,13 @@
         </mat-form-field>
       </div>
 
-      <button class="app-button" mat-raised-button color="accent"  (click)="goBack()">GO BACK</button>
-      <button class="app-button" mat-raised-button color="primary" (click)="save()">SAVE</button>
-      <!-- visible='isPasswordRepeated'  -->
+      <button class="app-button" mat-raised-button color="accent"  (click)="goBack()">
+        GO BACK
+      </button>
+      <button class="app-button" mat-raised-button color="primary"
+        [disabled]='form.errors || password.errors' (click)="save()">
+        SAVE
+      </button>
     </mat-card-content>
   </mat-card>
 </div>
