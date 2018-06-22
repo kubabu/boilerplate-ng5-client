@@ -18,6 +18,7 @@ export class AuthenticationService {
   private tokenRequest: TokenRequest;
   private isAuthenticatedSource$: BehaviorSubject<boolean>;
   public isAuthenticated$: Observable<boolean>;
+  private _launchUrl: string;
 
   constructor(
     private authConfig: AuthenticationConfiguration,
@@ -51,9 +52,12 @@ export class AuthenticationService {
 
       // setup observable timer to request new token just before this one expires
       const responseObject = new TokenLocalStorageItem(response);
-      // TODO: test
+      // TODO: move it somewhere it will be executed on every app load, test
+      // add extend authorization endpoint in API for already authorized users, so we dont need to store password in browser
       this.setReloadTimer(responseObject.validTo)
-        .subscribe(_ => this.login(this.tokenRequest.Username, this.tokenRequest.Password));
+        .subscribe(_ => {
+          this.login(this.tokenRequest.Username, this.tokenRequest.Password);
+        });
     }
   }
 
@@ -81,7 +85,8 @@ export class AuthenticationService {
   }
 
   // todo: move to separate Auth navigation service
-  public handleAuthentication(): void {
+  public handleAuthentication(launchUrl: string): void {
+    this._launchUrl = launchUrl;
     if (!this.isAuthenticated()) {
       this.navigateToLogin();
     } else {
@@ -94,9 +99,11 @@ export class AuthenticationService {
     if (token != null) {
       const startupUri = token.user.startupUri;
       if (startupUri != null && startupUri !== '') {
-        this.router.navigate([startupUri]);
+        this.router.navigate([startupUri]);     // configured url is more important than one from route
+      } else if (this._launchUrl != null) {
+        this.router.navigate([this._launchUrl]); // go where you came from
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/']);              // go to dashboard
       }
     }
   }
