@@ -18,6 +18,7 @@ import { MessageService } from 'app/services/message.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { SidebarService } from 'app/shared/services/sidebar.service';
 import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.service';
+import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.servi
     SidebarMappingConfiguration,
     RolesConfiguration,
     AuthConnectorService,
+    AuthNavigateService,
     AuthenticationStoreService,
     AuthenticationService,
     BarcodeValidatorService,

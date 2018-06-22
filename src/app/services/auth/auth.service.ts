@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { timer } from 'rxjs/observable/timer';
 
-import { AuthenticationConfiguration } from 'app/config/auth-config';
 import { TokenRequest } from 'app/models/token-request';
 import { TokenLocalStorageItem } from 'app/models/token-local-item';
 import { TokenResponse } from 'app/models/token-response';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
+import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
 
 
 @Injectable()
@@ -18,13 +17,11 @@ export class AuthenticationService {
   private tokenRequest: TokenRequest;
   private isAuthenticatedSource$: BehaviorSubject<boolean>;
   public isAuthenticated$: Observable<boolean>;
-  private _launchUrl: string;
 
   constructor(
-    private authConfig: AuthenticationConfiguration,
     private authConnector: AuthConnectorService,
     private authStore: AuthenticationStoreService,
-    private router: Router,
+    private navigateService: AuthNavigateService,
   ) {
     this.isAuthenticatedSource$ = new BehaviorSubject<boolean>(false);
     this.isAuthenticated$ = this.isAuthenticatedSource$.asObservable();
@@ -48,7 +45,7 @@ export class AuthenticationService {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       this.authStore.saveToken(response);
       this.isAuthenticatedSource$.next(true);
-      this.navigateAfterLogin();
+      this.navigateService.navigateAfterLogin();
 
       // setup observable timer to request new token just before this one expires
       const responseObject = new TokenLocalStorageItem(response);
@@ -72,7 +69,7 @@ export class AuthenticationService {
   logout() {
     this.authStore.clearToken();
     this.isAuthenticatedSource$.next(false);
-    this.navigateToLogin();
+    this.navigateService.navigateToLoginUrl();
   }
 
   private isAuthenticated(): boolean {
@@ -84,31 +81,13 @@ export class AuthenticationService {
     return isAuthenticated;
   }
 
-  // todo: move to separate Auth navigation service
   public handleAuthentication(launchUrl: string): void {
-    this._launchUrl = launchUrl;
+    this.navigateService.setLaunchUrl(launchUrl);
     if (!this.isAuthenticated()) {
-      this.navigateToLogin();
+      this.navigateService.navigateToLoginUrl();
     } else {
-      this.navigateAfterLogin();
+      this.navigateService.navigateAfterLogin();
     }
   }
 
-  navigateAfterLogin() {
-    const token = this.authStore.getToken();
-    if (token != null) {
-      const startupUri = token.user.startupUri;
-      if (startupUri != null && startupUri !== '') {
-        this.router.navigate([startupUri]);     // configured url is more important than one from route
-      } else if (this._launchUrl != null) {
-        this.router.navigate([this._launchUrl]); // go where you came from
-      } else {
-        this.router.navigate(['/']);              // go to dashboard
-      }
-    }
-  }
-
-  navigateToLogin() {
-    this.router.navigate([this.authConfig.loginRoute]);
-  }
 }
