@@ -34,7 +34,11 @@ export class AuthNavigateService {
 
     // browser URL that user entered with
     setLaunchUrl(launchUrl: string) {
-      this._launchUrl = launchUrl;
+      if (launchUrl.startsWith('/login')) {
+        this._launchUrl = '/';  // dont redirect to login after login
+      } else {
+        this._launchUrl = launchUrl;
+      }
     }
 
 }

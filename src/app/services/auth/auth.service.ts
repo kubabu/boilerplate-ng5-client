@@ -72,7 +72,7 @@ export class AuthenticationService {
     this.navigateService.navigateToLoginUrl();
   }
 
-  private isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     // check if token is still valid
     const token = this.authStore.getToken();
     const isAuthenticated = token != null && token.isValid();

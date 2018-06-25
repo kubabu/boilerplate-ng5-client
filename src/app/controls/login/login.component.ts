@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from 'app/services/auth/auth.service';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { Subject } from 'rxjs/Subject';
+import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     private authConn: AuthConnectorService,
+    private authNav: AuthNavigateService,
   ) {
     this.errorMessagesSubject$ = new Subject<string>();
     this.errorMessage = this.errorMessagesSubject$.asObservable();
@@ -26,7 +28,11 @@ export class LoginComponent implements OnInit {
   }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.auth.isAuthenticated()) {
+      this.authNav.navigateAfterLogin();
+    }
+  }
 
   login(username, password) {
     this.errorMessagesSubject$.next('Loguję się...');
