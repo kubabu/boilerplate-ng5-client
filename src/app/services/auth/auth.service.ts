@@ -9,12 +9,14 @@ import { TokenResponse } from 'app/models/token-response';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
+import { TokenReissueRequest } from 'app/models/token-reissue-request';
 
 
 @Injectable()
 export class AuthenticationService {
 
   private tokenRequest: TokenRequest;
+  private tokenReissueRequest: TokenReissueRequest;
   private isAuthenticatedSource$: BehaviorSubject<boolean>;
   public isAuthenticated$: Observable<boolean>;
 
@@ -36,6 +38,7 @@ export class AuthenticationService {
     this.authConnector.loginRequest(this.tokenRequest)
       .subscribe(
         resp => this.onTokenResponse(resp),
+        // error = > // setup timer and retry
       );
   }
 
@@ -47,15 +50,26 @@ export class AuthenticationService {
       this.isAuthenticatedSource$.next(true);
       this.navigateService.navigateAfterLogin();
 
-      // setup observable timer to request new token just before this one expires
-      const responseObject = new TokenLocalStorageItem(response);
-      // TODO: move it somewhere it will be executed on every app load, test
-      // add extend authorization endpoint in API for already authorized users, so we dont need to store password in browser
-      this.setReloadTimer(responseObject.validTo)
-        .subscribe(_ => {
-          this.login(this.tokenRequest.Username, this.tokenRequest.Password);
-        });
+      this.setupJwtReissue();
     }
+  }
+
+  setupJwtReissue() {
+    const tokenResponse = this.authStore.getToken();
+    // cache login, token to request JWT reissue
+    this.tokenReissueRequest = new TokenReissueRequest();
+    this.tokenReissueRequest.Username = tokenResponse.user.name;
+    this.tokenReissueRequest.Token = tokenResponse.token;
+    // setup observable timer to request new token just before this one expires
+    // TODO: move it somewhere it will be executed on every app load, test
+    this.setReloadTimer(tokenResponse.validTo)
+      .subscribe(_ => {
+        this.authConnector.jwtReissueRequest(this.tokenReissueRequest)
+          .subscribe(
+            resp => this.onTokenResponse(resp),
+            // error => wait few minutes and retry?
+          );
+      });
   }
 
   setReloadTimer(when: Date): Observable<number> {
@@ -86,6 +100,7 @@ export class AuthenticationService {
     if (!this.isAuthenticated()) {
       this.navigateService.navigateToLoginUrl();
     } else {
+      this.setupJwtReissue();
       this.navigateService.navigateAfterLogin();
     }
   }

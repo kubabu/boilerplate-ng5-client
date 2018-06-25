@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { ApiConfiguration } from 'app/config/api-config';
 import { TokenRequest } from 'app/models/token-request';
+import { TokenReissueRequest } from 'app/models/token-reissue-request';
 
 @Injectable()
 export class AuthConnectorService {
@@ -27,6 +28,14 @@ export class AuthConnectorService {
   loginRequest(tokenRequest: TokenRequest): Observable<any> {
 
     return this.http.post(this.apiConfig.getAuthPath(), tokenRequest, this.apiConfig.httpOptions).pipe(
+      tap(_ => this.erorrSubject$.next('')),
+      catchError(this.handleError<any>('loginRequest')),
+    );
+  }
+
+  jwtReissueRequest(tokenRequest: TokenReissueRequest): Observable<any> {
+
+    return this.http.post(this.apiConfig.getAuthReissuePath(), tokenRequest, this.apiConfig.httpOptions).pipe(
       tap(_ => this.erorrSubject$.next('')),
       catchError(this.handleError<any>('loginRequest')),
     );
