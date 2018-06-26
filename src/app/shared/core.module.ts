@@ -19,6 +19,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { SidebarService } from 'app/shared/services/sidebar.service';
 import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.service';
 import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
+import { CanLoadUsersSection } from 'app/controls/users/users.guard';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
       useClass: AuthInterceptor,
       multi: true,
     },
+    CanLoadUsersSection,
     PasswordErrorStateMatcher,
   ],
   exports: [

@@ -8,6 +8,7 @@ import { DashboardComponent } from 'app/controls/users/dashboard/dashboard.compo
 import { HammerDemoComponent } from 'app/controls/hammer-demo/hammer-demo.component';
 import { MessagesComponent } from 'app/controls/messages/messages.component';
 import { OrdersToCompleteComponent } from 'app/controls/completation/orders-to-complete/orders-to-complete.component';
+import { CanLoadUsersSection } from 'app/controls/users/users.guard';
 
 const ROOT_ROUTES: Routes = [
   // DEVELOPER DEMO COMPONENTS FROM NOW
@@ -32,6 +33,7 @@ const ROOT_ROUTES: Routes = [
   },
   {
     path: 'users',
+    canLoad: [CanLoadUsersSection],
     loadChildren: './controls/users/users.module#UsersModule',
      // TODO: canLoad if user role is Admin
   },
