@@ -13,7 +13,7 @@ export class TokenLocalStorageItem {
 
         this.token = response.token;
         this.user = response.user;
-        this.validTo = new Date(Date.parse(response.validTo));
+        this.validTo = this.parseValidTo(response.validTo);
     }
 
 
@@ -24,4 +24,8 @@ export class TokenLocalStorageItem {
     public isValid(): boolean {
         return this.user != null && this.token != null &&  !this.isExpired();
     }
+
+    private parseValidTo(validTo: string): Date {
+        return new Date(Date.parse(validTo));
+      }
 }
