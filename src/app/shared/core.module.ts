@@ -21,6 +21,8 @@ import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.servi
 import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
 import { CanLoadUsersSection } from 'app/controls/users/users.guard';
 import { LogoutService } from 'app/services/auth/logout.service';
+import { AuthorizationService } from 'app/services/auth/authorization.service';
+import { RolesService } from 'app/services/auth/roles-service';
 
 @NgModule({
   imports: [
@@ -35,6 +37,7 @@ import { LogoutService } from 'app/services/auth/logout.service';
     AuthNavigateService,
     AuthenticationStoreService,
     AuthenticationService,
+    AuthorizationService,
     LogoutService,
     BarcodeValidatorService,
     BarcodeDecoderService,
@@ -42,6 +45,7 @@ import { LogoutService } from 'app/services/auth/logout.service';
     CompletationOrdersDbService,
     UserService,
     MessageService,
+    RolesService,
     SidebarService,
     SidebarMappingService,
     {

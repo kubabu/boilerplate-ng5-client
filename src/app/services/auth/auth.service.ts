@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { timer } from 'rxjs/observable/timer';
 
 import { TokenRequest } from 'app/models/token-request';
-import { TokenLocalStorageItem } from 'app/models/token-local-item';
 import { TokenResponse } from 'app/models/token-response';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';

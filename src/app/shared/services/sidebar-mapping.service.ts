@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SidenavItem } from 'app/models/sidenav-item';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
-import { RolesConfiguration } from 'app/config/roles-config';
 import { SidebarMappingConfiguration } from 'app/config/sidebar-mapping-config';
+import { RolesService } from 'app/services/auth/roles-service';
 
 
 @Injectable()
@@ -11,14 +11,14 @@ export class SidebarMappingService {
   constructor(
     private mappingConfig: SidebarMappingConfiguration,
     private tokenStore: AuthenticationStoreService,
-    private rolesConfig: RolesConfiguration,
+    private rolesConfig: RolesService,
   ) { }
 
   public getSidenavItems(isAuthenticated: boolean): SidenavItem[] {
     if (!isAuthenticated) {
       return this.getItemsNotAuth();
     } else {
-      const role = this.tokenStore.getToken().user.role.toLocaleLowerCase();
+      const role = this.tokenStore.getToken().user.role;
       return this.getItemsForRole(role);
     }
   }
