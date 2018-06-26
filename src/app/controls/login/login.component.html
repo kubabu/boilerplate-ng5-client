@@ -1,21 +1,26 @@
 <mat-card class="text-center">
   <h1 class="title">Wymagane uwierzytelnienie </h1>
-  <form>
-    <mat-form-field>
-      <input matInput #username 
-        type="text" id="Username"
-        placeholder="Nazwa użytkownika"/>
-    </mat-form-field>
-
-    <mat-form-field class="input-container">
-      <input matInput #pass 
-        type="password" id="Password"
-        placeholder="Hasło"/>
-    </mat-form-field>
-    
-    <button mat-button (click)="login(username.value, pass.value)">
-      Zaloguj się
-    </button>
-  </form>
+  
+  <div class="flex-container" fxLayout="column">
+    <div class="flex-item">
+      <mat-form-field>
+        <input matInput #username 
+          type="text" id="Username"
+          placeholder="Nazwa użytkownika"/>
+      </mat-form-field>
+    </div>
+    <div class="flex-item">
+      <mat-form-field class="input-container">
+        <input matInput #pass 
+          type="password" id="Password"
+          placeholder="Hasło"/>
+      </mat-form-field>
+    </div>
+    <div class="flex-item">  
+      <button mat-button (click)="login(username.value, pass.value)">
+        Zaloguj się
+      </button>
+    </div>
+  </div>
   <h2 *ngIf="errorMessage">{{ errorMessage | async }}</h2>
 </mat-card>
