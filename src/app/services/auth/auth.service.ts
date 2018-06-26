@@ -30,7 +30,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    // save token request data to resent before expiration
+    // save token request data to be able to retry login
     this.tokenRequest = new TokenRequest();
     this.tokenRequest.Username = username;
     this.tokenRequest.Password = password;
@@ -49,19 +49,20 @@ export class AuthenticationService {
       this.authStore.saveToken(response);
       this.isAuthenticatedSource$.next(true);
       this.navigateService.navigateAfterLogin();
-
+      // client has valid token, setup reissue request
       this.setupJwtReissue();
     }
   }
 
   setupJwtReissue() {
+    // it needs to be be executed on every app load scenario
+    // when client already has valid token
     const tokenResponse = this.authStore.getToken();
     // cache login, token to request JWT reissue
     this.tokenReissueRequest = new TokenReissueRequest();
     this.tokenReissueRequest.Username = tokenResponse.user.name;
     this.tokenReissueRequest.Token = tokenResponse.token;
     // setup observable timer to request new token just before this one expires
-    // TODO: move it somewhere it will be executed on every app load, test
     this.setReloadTimer(tokenResponse.validTo)
       .subscribe(_ => {
         this.authConnector.jwtReissueRequest(this.tokenReissueRequest)
@@ -100,6 +101,7 @@ export class AuthenticationService {
     if (!this.isAuthenticated()) {
       this.navigateService.navigateToLoginUrl();
     } else {
+      // client has valid token, setup reissue request
       this.setupJwtReissue();
       this.navigateService.navigateAfterLogin();
     }

@@ -8,26 +8,29 @@ import { TokenResponse } from 'app/models/token-response';
 export class AuthenticationStoreService {
   // local storage for auth data
 
+  static getTokenValue(): string {
+    return localStorage.getItem(AuthenticationConfiguration.tokenKey);
+  }
 
-  constructor(private authConfig: AuthenticationConfiguration) {  }
+  // constructor(private authConfig: AuthenticationConfiguration) {  }
 
 
   saveToken(response: TokenResponse) {
-    localStorage.setItem(this.authConfig.token, JSON.stringify(response));
+    localStorage.setItem(AuthenticationConfiguration.token, JSON.stringify(response));
     // duplicated token storage, interceptors have no DI but they can access localstorage
-    localStorage.setItem(this.authConfig.tokenKey, response.token);
+    localStorage.setItem(AuthenticationConfiguration.tokenKey, response.token);
   }
 
   clearToken() {
     // remove token and user from local storage to log user out
-    localStorage.removeItem(this.authConfig.token);
-    localStorage.removeItem(this.authConfig.tokenKey);
+    localStorage.removeItem(AuthenticationConfiguration.token);
+    localStorage.removeItem(AuthenticationConfiguration.tokenKey);
   }
 
 
   getToken(): TokenLocalStorageItem {
     try {
-      const tokenJson = localStorage.getItem(this.authConfig.token);
+      const tokenJson = localStorage.getItem(AuthenticationConfiguration.token);
       const response = JSON.parse(tokenJson) as TokenResponse;
       const tokenItem = new TokenLocalStorageItem(response);
 
