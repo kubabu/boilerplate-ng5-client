@@ -4,7 +4,7 @@ import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
-import { AuthenticationService } from 'app/services/auth/auth.service';
+import { LogoutService } from 'app/services/auth/logout.service';
 
 
 @Injectable()
@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
         private authStore: AuthenticationStoreService,
-        // private authService: AuthenticationService,
+        private logoutService: LogoutService,
     ) { }
 
     intercept(req: HttpRequest<any>,
@@ -33,7 +33,8 @@ export class AuthInterceptor implements HttpInterceptor {
                     // API is unavailable
                 } else if (err.status === 401) {
                     // unauthorized. JWT expired or other problem. User needs to relogin
-                    // this.authService.logout();
+                    console.log('Unauthorized. JWT expired or other problem. User needs to relogin');
+                    this.logoutService.logout();
                 }
                 // do error handling here
                 // console.log(err.message);

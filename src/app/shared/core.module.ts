@@ -20,6 +20,7 @@ import { SidebarService } from 'app/shared/services/sidebar.service';
 import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.service';
 import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
 import { CanLoadUsersSection } from 'app/controls/users/users.guard';
+import { LogoutService } from 'app/services/auth/logout.service';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { CanLoadUsersSection } from 'app/controls/users/users.guard';
     AuthNavigateService,
     AuthenticationStoreService,
     AuthenticationService,
+    LogoutService,
     BarcodeValidatorService,
     BarcodeDecoderService,
     CompletationOrdersService,
