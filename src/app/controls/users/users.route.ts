@@ -5,7 +5,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { UsersRootComponent } from './users-root/users-root.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { MessagesComponent } from 'app/controls/messages/messages.component';
 
 
 const routes: Routes = [

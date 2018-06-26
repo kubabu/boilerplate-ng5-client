@@ -26,6 +26,7 @@ const ROOT_ROUTES: Routes = [
   // DEVELOPER DEMO END
   {
     path: 'completation',
+    // lazy loading of submodule with loadChildren
     component: OrdersToCompleteComponent,
     // TODO: canLoad if User is User, Admin, Developer
   },
