@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from 'app/services/auth/auth.service';
+import { AuthenticationService } from 'app/services/auth/authentication.service';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { Subject } from 'rxjs/Subject';
 import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';

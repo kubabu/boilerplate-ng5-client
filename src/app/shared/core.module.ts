@@ -6,7 +6,7 @@ import { RolesConfiguration } from 'app/config/roles-config';
 import { SidebarMappingConfiguration } from 'app/config/sidebar-mapping-config';
 import { BarcodeDecoderService } from 'app/controls/barcode/services/barcode-decoder.service';
 import { BarcodeValidatorService } from 'app/controls/barcode/services/barcode-validator.service';
-import { AuthenticationService } from 'app/services/auth/auth.service';
+import { AuthenticationService } from 'app/services/auth/authentication.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { AuthInterceptor } from 'app/services/interceptors/auth-interceptor.service';

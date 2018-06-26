@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
-import { AuthenticationService } from 'app/services/auth/auth.service';
+import { AuthenticationService } from 'app/services/auth/authentication.service';
 import { SidebarService } from 'app/shared/services/sidebar.service';
 
 

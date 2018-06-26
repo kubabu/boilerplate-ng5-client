@@ -4,7 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
 
 import { SidenavItem } from 'app/models/sidenav-item';
-import { AuthenticationService } from 'app/services/auth/auth.service';
+import { AuthenticationService } from 'app/services/auth/authentication.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SidebarMappingService } from 'app/shared/services/sidebar-mapping.service';
 
