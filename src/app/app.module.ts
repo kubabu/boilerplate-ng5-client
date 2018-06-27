@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { SignaturePadModule } from 'angular2-signaturepad';
+
 import { AppRoutingModule } from 'app/app.routing';
 import { AppComponent } from 'app/app.component';
 import { SidenavComponent } from 'app/shared/sidenav/sidenav.component';
@@ -25,6 +27,7 @@ import { UsersModule } from 'app/controls/users/users.module';
     BarcodeModule,
     PagesModule,
     UsersModule,
+    SignaturePadModule,
   ],
   bootstrap: [
     AppComponent,
