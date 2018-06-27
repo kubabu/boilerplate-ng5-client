@@ -23,6 +23,7 @@ import { CanLoadUsersSection } from 'app/controls/users/users.guard';
 import { LogoutService } from 'app/services/auth/logout.service';
 import { AuthorizationService } from 'app/services/auth/authorization.service';
 import { RolesService } from 'app/services/auth/roles-service';
+import { CanLoadCompletationSection } from 'app/controls/completation/completation.guard';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { RolesService } from 'app/services/auth/roles-service';
       useClass: AuthInterceptor,
       multi: true,
     },
+    CanLoadCompletationSection,
     CanLoadUsersSection,
     PasswordErrorStateMatcher,
   ],

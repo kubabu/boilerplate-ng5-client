@@ -4,7 +4,6 @@ import { CoreModule } from 'app/shared/core.module';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { OrdersToCompleteComponent } from './completation/orders-to-complete/orders-to-complete.component';
 import { MessagesComponent } from './messages/messages.component';
 import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
 
@@ -19,7 +18,6 @@ import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
     LogoutComponent,
     MessagesComponent,
     NotFoundComponent,
-    OrdersToCompleteComponent,
   ],
 })
 export class PagesModule { }

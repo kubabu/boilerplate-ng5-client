@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SignaturePadModule } from 'angular2-signaturepad';
-
 import { AppRoutingModule } from 'app/app.routing';
 import { AppComponent } from 'app/app.component';
 import { SidenavComponent } from 'app/shared/sidenav/sidenav.component';
@@ -12,6 +10,7 @@ import { CoreModule } from 'app/shared/core.module';
 import { PagesModule } from 'app/controls/pages.module';
 import { BarcodeModule } from 'app/controls/barcode/barcode.module';
 import { UsersModule } from 'app/controls/users/users.module';
+import { CompletationModule } from 'app/controls/completation/completation.module';
 
 @NgModule({
   declarations: [
@@ -25,9 +24,9 @@ import { UsersModule } from 'app/controls/users/users.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     BarcodeModule,
+    CompletationModule,
     PagesModule,
     UsersModule,
-    SignaturePadModule,
   ],
   bootstrap: [
     AppComponent,

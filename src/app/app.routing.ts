@@ -9,6 +9,7 @@ import { HammerDemoComponent } from 'app/controls/hammer-demo/hammer-demo.compon
 import { MessagesComponent } from 'app/controls/messages/messages.component';
 import { OrdersToCompleteComponent } from 'app/controls/completation/orders-to-complete/orders-to-complete.component';
 import { CanLoadUsersSection } from 'app/controls/users/users.guard';
+import { CanLoadCompletationSection } from './controls/completation/completation.guard';
 
 const ROOT_ROUTES: Routes = [
   // DEVELOPER DEMO COMPONENTS FROM NOW
@@ -27,15 +28,14 @@ const ROOT_ROUTES: Routes = [
   // DEVELOPER DEMO END
   {
     path: 'completation',
-    // lazy loading of submodule with loadChildren
-    component: OrdersToCompleteComponent,
-    // TODO: canLoad if User is User, Admin, Developer
+    canLoad: [CanLoadCompletationSection],
+    // lazy loading of submodule
+    loadChildren: './controls/completation/completation.module#CompletationModule',
   },
   {
     path: 'users',
     canLoad: [CanLoadUsersSection],
     loadChildren: './controls/users/users.module#UsersModule',
-     // TODO: canLoad if user role is Admin
   },
   {
     path: 'login',

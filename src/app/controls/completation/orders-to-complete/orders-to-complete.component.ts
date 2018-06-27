@@ -16,5 +16,4 @@ export class OrdersToCompleteComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

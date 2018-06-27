@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { User } from 'app/models/user';
 import { UserService } from 'app/services/user.service';
-import { FormControl, ValidationErrors, Validators, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { PasswordErrorStateMatcher, PasswordValidator } from 'app/services/validators/password-validation.service';
 import { RolesConfiguration } from 'app/config/roles-config';
 
