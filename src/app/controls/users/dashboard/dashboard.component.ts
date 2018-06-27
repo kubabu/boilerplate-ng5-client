@@ -10,6 +10,7 @@ import { UserService } from 'app/services/user.service';
 })
 export class DashboardComponent implements OnInit {
   users: User[] = [];
+  isLoading = true;
 
   constructor(private userService: UserService) { }
 
@@ -20,6 +21,7 @@ export class DashboardComponent implements OnInit {
   getUsers(): void {
     this.userService.getUsers()
       .subscribe(users => {
+        this.isLoading = false;
         if (users.length > 5) {
           this.users = users.slice(1, 5);
         } else {

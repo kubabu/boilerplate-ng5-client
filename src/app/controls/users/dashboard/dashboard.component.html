@@ -1,15 +1,11 @@
 <div class="app-content">
-  <!-- <div class="app-loading">
-    <div class="logo"></div>
-    <svg class="spinner" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-    </svg>
-  </div>   -->
   <mat-card >
     <mat-card-content>
       <h3> Użytkownicy </h3> <app-user-search></app-user-search>
     </mat-card-content>
   </mat-card>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 
   <div class="grid">
     <a *ngFor="let user of users" class="col-1-4"
@@ -26,4 +22,5 @@
 
     </a>
   </div>
-</div> -->
+
+</div>
