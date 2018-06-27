@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 
-import { AppMaterialModule } from './../../app.material.module';
 import { UsersComponent } from './users.component';
-import { UserService } from './../../services/user.service';
+import { UserService } from 'app/services/user.service';
 import { MockUserService } from './../dashboard/dashboard.component.spec';
-import { MessageService } from './../../services/message.service';
+import { MessageService } from 'app/services/message.service';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -14,14 +13,13 @@ describe('UsersComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        AppMaterialModule,
         RouterModule,
       ],
       declarations: [ UsersComponent ],
       providers: [
         { provide: UserService, useClass: MockUserService },
         MessageService,
-      ]
+      ],
     })
     .compileComponents();
   }));

@@ -13,7 +13,8 @@
       <mat-form-field class="input-container">
         <input matInput #pass 
           type="password" id="Password"
-          placeholder="Hasło"/>
+          placeholder="Hasło"
+          (keydown.enter)="login(username.value, pass.value)"/>
       </mat-form-field>
     </div>
     <div class="flex-item">  

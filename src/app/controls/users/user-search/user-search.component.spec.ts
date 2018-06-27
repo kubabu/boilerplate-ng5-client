@@ -4,9 +4,8 @@ import { ControlContainer } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { UserSearchComponent } from './user-search.component';
-import { UserService } from './../../services/user.service';
+import { UserService } from 'app/services/user.service';
 import { MockUserService } from './../dashboard/dashboard.component.spec';
-import { AppMaterialModule } from './../../app.material.module';
 
 
 class MockControlContainer {}
@@ -19,7 +18,6 @@ describe('UserSearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ UserSearchComponent ],
       imports: [
-        AppMaterialModule,
         RouterModule,
         FormsModule,
         ReactiveFormsModule,
@@ -28,7 +26,7 @@ describe('UserSearchComponent', () => {
         { provide: FormControl, useClass: MockControlContainer },
         { provide: UserService, useClass: MockUserService },
         { provide: ControlContainer, useExisting: NgForm },
-      ]
+      ],
     })
     .compileComponents();
   }));
