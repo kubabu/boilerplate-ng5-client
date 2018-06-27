@@ -13,8 +13,8 @@ export class CompletationOrderDetailComponent implements OnInit, AfterViewInit {
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
-    'canvasWidth': 500,
-    'canvasHeight': 300,
+    'canvasWidth': 600,
+    'canvasHeight': 400,
   };
 
   constructor(private route: ActivatedRoute) { }
