@@ -12,6 +12,7 @@ import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
 })
 export class LoginComponent implements OnInit {
 
+  isLoading = false;
   errorMessagesSubject$: Subject<string>;
   errorMessage: Observable<string>;
 
@@ -24,7 +25,10 @@ export class LoginComponent implements OnInit {
     this.errorMessagesSubject$ = new Subject<string>();
     this.errorMessage = this.errorMessagesSubject$.asObservable();
     this.authConn.errorMessage$
-      .subscribe(msg => this.errorMessagesSubject$.next(msg));
+      .subscribe(msg => {
+        this.isLoading = false;
+        this.errorMessagesSubject$.next(msg);
+      });
   }
 
 
@@ -35,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(username, password) {
+    this.isLoading = true;
     this.errorMessagesSubject$.next('Loguję się...');
     this.auth.login(username, password)
   }

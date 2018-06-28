@@ -23,5 +23,6 @@
       </button>
     </div>
   </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <h2 *ngIf="errorMessage">{{ errorMessage | async }}</h2>
 </mat-card>
