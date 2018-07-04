@@ -3,12 +3,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { timer } from 'rxjs/observable/timer';
 
-import { TokenRequest } from 'app/models/token-request';
-import { TokenResponse } from 'app/models/token-response';
+import { TokenRequest } from 'app/models/auth/token-request';
+import { TokenResponse } from 'app/models/auth/token-response';
 import { AuthConnectorService } from 'app/services/auth/auth-connector.service';
 import { AuthenticationStoreService } from 'app/services/auth/auth-store.service';
 import { AuthNavigateService } from 'app/services/auth/auth-navigate.service';
-import { TokenReissueRequest } from 'app/models/token-reissue-request';
+import { TokenReissueRequest } from 'app/models/auth/token-reissue-request';
 import { LogoutService } from './logout.service';
 
 

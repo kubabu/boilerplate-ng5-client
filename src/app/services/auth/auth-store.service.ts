@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationConfiguration } from 'app/config/auth-config';
-import { TokenLocalStorageItem } from 'app/models/token-local-item';
-import { TokenResponse } from 'app/models/token-response';
+import { TokenLocalStorageItem } from 'app/models/auth/token-local-item';
+import { TokenResponse } from 'app/models/auth/token-response';
 
 
 @Injectable()

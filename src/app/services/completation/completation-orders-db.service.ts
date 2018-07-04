@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { ApiConfiguration } from 'app/config/api-config';
-import { CompletationOrder } from 'app/models/completation-order';
+import { CompletationOrder } from 'app/models/completation/completation-order';
 
 
 @Injectable()

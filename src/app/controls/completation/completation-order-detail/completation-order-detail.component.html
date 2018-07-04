@@ -1,21 +1,24 @@
-<p>
-  Szczegóły kompletacji danego zamówienia
-</p>
-
-<app-barcode></app-barcode>
-
-<div>
-  <signature-pad 
-    (onBeginEvent)="drawStart()" 
-    (onEndEvent)="drawComplete()">
-    [options]="signaturePadOptions" 
-  </signature-pad>
-  <p>
-    <button mat-button (click)='signaturePad.clear()'>
-      WYCZYŚĆ PODPIS
-    </button>
-    <button mat-button >
-      OK
-    </button>
-  </p>
-</div>
+<mat-card>
+  <h2> Zamówienie #{{ order.orderNumber }} dla {{ order.distributionCenter }} </h2>
+  <mat-card-content>
+    <div> Na {{ order.realiseBy }} </div>
+    
+    <app-barcode></app-barcode>
+      
+    <div>
+      <signature-pad 
+      (onBeginEvent)="drawStart()" 
+      (onEndEvent)="drawComplete()">
+      [options]="signaturePadOptions" 
+      </signature-pad>
+      <p>
+        <button mat-button (click)='signaturePad.clear()'>
+          WYCZYŚĆ PODPIS
+        </button>
+        <button mat-button >
+          OK
+        </button>
+      </p>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -3,12 +3,12 @@
 <ng-template #thenBlock>
   <div class="app-content">
     <mat-card *ngFor="let order of ordersService.Orders$ | async">
-      <h2> Zamówienie #{{ order.id }} </h2>
+      <h2> Zamówienie #{{ order.orderNumber }} dla {{ order.distributionCenter }} </h2>
       <mat-card-content>
-        <div> {{ order.value }} </div>
+        <div> Na {{ order.realiseBy }} </div>
       </mat-card-content>
     </mat-card>    
-</div>
+  </div>
 </ng-template>
 
 <ng-template #elseBlock>

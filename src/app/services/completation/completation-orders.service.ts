@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { ApiConfiguration } from 'app/config/api-config';
-import { CompletationOrder } from 'app/models/completation-order';
+import { CompletationOrder } from 'app/models/completation/completation-order';
 import { CompletationOrdersDbService } from 'app/services/completation/completation-orders-db.service';
 
 
@@ -16,6 +16,7 @@ export class CompletationOrdersService {
   private _ordersToComplete: CompletationOrder[];
   private _ordersToComplete$: Subject<CompletationOrder[]>;
   private _reconnects = 0;
+
   public IsConnected$: Observable<boolean>;
   public Orders$: Observable<CompletationOrder[]>;
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { CompletationOrder } from 'app/models/completation/completation-order';
 
 @Component({
   selector: 'app-completation-order-detail',
@@ -9,6 +10,7 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 })
 export class CompletationOrderDetailComponent implements OnInit, AfterViewInit {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  public order: CompletationOrder;
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,

@@ -5,8 +5,8 @@ import { of } from 'rxjs/observable/of';
 import { catchError, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { ApiConfiguration } from 'app/config/api-config';
-import { TokenRequest } from 'app/models/token-request';
-import { TokenReissueRequest } from 'app/models/token-reissue-request';
+import { TokenRequest } from 'app/models/auth/token-request';
+import { TokenReissueRequest } from 'app/models/auth/token-reissue-request';
 
 @Injectable()
 export class AuthConnectorService {
