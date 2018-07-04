@@ -20,4 +20,4 @@ import { HammerDemoComponent } from './hammer-demo/hammer-demo.component';
     NotFoundComponent,
   ],
 })
-export class PagesModule { }
+export class ControlsModule { }

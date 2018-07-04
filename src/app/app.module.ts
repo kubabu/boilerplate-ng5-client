@@ -7,7 +7,7 @@ import { AppComponent } from 'app/app.component';
 import { SidenavComponent } from 'app/shared/sidenav/sidenav.component';
 import { FabMenuComponent } from 'app/shared/fab-menu/fab-menu.component';
 import { CoreModule } from 'app/shared/core.module';
-import { PagesModule } from 'app/controls/pages.module';
+import { ControlsModule } from 'app/controls/controls.module';
 import { BarcodeModule } from 'app/controls/barcode/barcode.module';
 import { UsersModule } from 'app/controls/users/users.module';
 import { CompletationModule } from 'app/controls/completation/completation.module';
@@ -25,7 +25,7 @@ import { CompletationModule } from 'app/controls/completation/completation.modul
     AppRoutingModule,
     BarcodeModule,
     CompletationModule,
-    PagesModule,
+    ControlsModule,
     UsersModule,
   ],
   bootstrap: [

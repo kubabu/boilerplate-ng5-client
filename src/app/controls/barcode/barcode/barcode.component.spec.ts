@@ -9,7 +9,7 @@ describe('BarcodeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-             declarations: [BarcodeComponent]
+             declarations: [BarcodeComponent],
            })
            .compileComponents();
   }));

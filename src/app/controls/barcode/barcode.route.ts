@@ -1,11 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { BarcodeComponent } from './barcode.component';
+import { BarcodeCardComponent } from './barcode-card/barcode-card.component';
 
 export const BARCODE_ROUTE: Routes = [
   {
     path: '',
-    component: BarcodeComponent,
+    component: BarcodeCardComponent,
     // do not use route for now
     // children: [
     //   {

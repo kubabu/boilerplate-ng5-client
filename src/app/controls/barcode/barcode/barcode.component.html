@@ -1,0 +1,5 @@
+<!-- <h2 class="text-center">Skanuj kod kreskowy</h2> -->
+<app-input-field [barcodeFormat]="barcodeFormat"></app-input-field>
+
+<app-open-media-stream *ngIf="!showMedia" (click)="showMedia=true"></app-open-media-stream>
+<app-media-stream *ngIf="showMedia" [barcodeFormat]="barcodeFormat"></app-media-stream>
