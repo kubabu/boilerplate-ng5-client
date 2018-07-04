@@ -1,16 +1,21 @@
 <p>
   Szczegóły kompletacji danego zamówienia
 </p>
-<signature-pad 
-  (onBeginEvent)="drawStart()" 
-  (onEndEvent)="drawComplete()">
-  [options]="signaturePadOptions" 
-</signature-pad>
-<p>
-  <button mat-button (click)='signaturePad.clear()'>
-    WYCZYŚĆ PODPIS
-  </button>
-  <button mat-button >
-    OK
-  </button>
-</p>
+
+<app-barcode></app-barcode>
+
+<div>
+  <signature-pad 
+    (onBeginEvent)="drawStart()" 
+    (onEndEvent)="drawComplete()">
+    [options]="signaturePadOptions" 
+  </signature-pad>
+  <p>
+    <button mat-button (click)='signaturePad.clear()'>
+      WYCZYŚĆ PODPIS
+    </button>
+    <button mat-button >
+      OK
+    </button>
+  </p>
+</div>

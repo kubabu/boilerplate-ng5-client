@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
-
 @Component({
   selector: 'app-completation-order-detail',
   templateUrl: './completation-order-detail.component.html',
@@ -35,12 +34,12 @@ export class CompletationOrderDetailComponent implements OnInit, AfterViewInit {
 
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
-    console.log(this.signaturePad.toDataURL());
+    // console.log(this.signaturePad.toDataURL());
   }
 
   drawStart() {
     // will be notified of szimek/signature_pad's onBegin event
-    console.log('begin drawing');
+    // console.log('begin drawing');
   }
 
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DummyPlaceholderComponent } from './dummy-placeholder.component';
+import { OpenMediaStreamComponent } from './open-media-stream.component';
 
-describe('DummyPlaceholderComponent', () => {
-  let component: DummyPlaceholderComponent;
-  let fixture: ComponentFixture<DummyPlaceholderComponent>;
+describe('OpenMediaStreamComponent', () => {
+  let component: OpenMediaStreamComponent;
+  let fixture: ComponentFixture<OpenMediaStreamComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DummyPlaceholderComponent ]
+      declarations: [ OpenMediaStreamComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DummyPlaceholderComponent);
+    fixture = TestBed.createComponent(OpenMediaStreamComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
