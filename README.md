@@ -1,18 +1,25 @@
-# Angular Barcode Scanner and Validator Application Via Upload, Instant Search and Media Stream (webcam)
+# boilerplate-ng5-client
 
-This application tend to bring a simple barcode scanner into your browser using your webcam. 
-It's just an experimental and definitely can be a lot better. I will try to make this application widely usable as 
-soon as possible and possibly make that as an NG Module and reusable soon. 
+Bolerplate Angular 5 app to work with .NET Core backend.
 
-### [Live Demo](https://www.majidhajian.com/ng2-barcode-validator)
-
-[![Angular Barcode Scanner](barcodescanner.gif)](https://www.majidhajian.com/ng2-barcode-validator)
+##Features:
+- SSL secured with JWT
+- Role based view authorization
+- SignalR
+- HammerJS gesture recognition
+- Quagga barcode reader, based on [mhdaily](https://github.com/mhadaily/ngx-barcode-validator)
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli).
 
 ## Development server
 
 Run `npm start` (not `ng serve` ! no ssl there) for a dev server. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files
+
+## Run and debug in VS Code
+
+- Open project in code
+- Run `npm start` in terminal
+- Launch debug press  `F5`
 
 ## Code scaffolding
 
