@@ -2,7 +2,7 @@
 
 Bolerplate Angular 5 app to work with .NET Core backend.
 
-##Features:
+## Features:
 - SSL secured with JWT
 - Role based view authorization
 - SignalR
